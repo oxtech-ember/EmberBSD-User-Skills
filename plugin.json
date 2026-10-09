@@ -1,0 +1,36 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "emberbsd-user",
+  "version": "0.1.0",
+  "description": "Agent skills for EmberBSD users: applications, device diagnostics, personal Ports and GitHub workflows.",
+  "author": {
+    "name": "neonix20b",
+    "url": "https://github.com/neonix20b"
+  },
+  "homepage": "https://github.com/oxtech-ember/EmberBSD-User-Skills",
+  "repository": "https://github.com/oxtech-ember/EmberBSD-User-Skills",
+  "license": "MIT",
+  "keywords": [
+    "emberbsd",
+    "user",
+    "applications",
+    "personal-ports",
+    "skills",
+    "agent-plugins"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "EmberBSD User Skills",
+        "shortDescription": "Use EmberBSD devices and maintain your personal Ports.",
+        "longDescription": "Install and configure applications, diagnose devices, maintain personal source changes across upstream updates, and publish checked patches to the selected personal repository using available tools.",
+        "developerName": "neonix20b",
+        "category": "Developer Tools",
+        "websiteURL": "https://github.com/oxtech-ember/EmberBSD-User-Skills",
+        "defaultPrompt": [
+          "Use $emberbsd-user-guide to complete my EmberBSD user task and verify the result."
+        ]
+      }
+    }
+  }
+}

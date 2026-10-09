@@ -1,0 +1,20 @@
+{
+  "name": "emberbsd-user-skills",
+  "interface": {
+    "displayName": "EmberBSD User Skills"
+  },
+  "plugins": [
+    {
+      "name": "emberbsd-user",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Developer Tools"
+    }
+  ]
+}
