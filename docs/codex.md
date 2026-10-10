@@ -9,7 +9,7 @@ codex plugin add emberbsd-user@emberbsd-user-skills
 ```
 
 The catalog is `emberbsd-user-skills`; the package is `emberbsd-user`, version
-`0.1.0`. Start a new conversation and select `$emberbsd-user-guide`. The separate
+`0.1.1`. Start a new conversation and select `$emberbsd-user-guide`. The separate
 `emberbsd-development@ember-agent-skills` package can remain installed.
 
 Refresh the catalog with `codex plugin marketplace upgrade emberbsd-user-skills`.

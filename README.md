@@ -4,7 +4,7 @@ Agent skills for people using [EmberBSD](https://github.com/oxtech-ember/EmberBS
 install and configure applications, diagnose devices, and maintain personal
 software changes through their own Ports repository and GitHub.
 
-Version **0.1.0** provides one entry skill,
+Version **0.1.1** provides one entry skill,
 [`emberbsd-user-guide`](skills/emberbsd-user-guide/SKILL.md), with focused
 references for applications, diagnostics, personal Ports, and GitHub.
 It uses the portable [Agent Plugins](https://agent-plugins.org/) and
@@ -62,7 +62,12 @@ Use your client's documented installation mechanism:
 3. For manual use, ask the assistant to read `SKILL.md` and the relevant linked
    references. This does not register automatic discovery.
 
-See the [Codex adapter](docs/codex.md) for one concrete client. The portable
+See the [Codex adapter](docs/codex.md) for one concrete client. ZCode and
+Claude Code discover the bundled `.claude-plugin/marketplace.json` catalog:
+in ZCode add the GitHub repository `oxtech-ember/EmberBSD-User-Skills` through
+**Settings → Plugin Management → Discover → `+`** and install `emberbsd-user`;
+in Claude Code use `/plugin marketplace add oxtech-ember/EmberBSD-User-Skills`
+and `/plugin install emberbsd-user@emberbsd-user-skills`. The portable
 format does not prescribe a universal installation command or require Codex.
 Keep your project's instructions. Root `AGENTS.md` governs contributions to
 this repository; it is not a replacement for device or application policies.
@@ -76,7 +81,10 @@ and [Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) own their
 application contracts and device operations when implemented. Skills explain
 how to use real tools; they do not create substitute APIs.
 
-Package consistency and native Codex discovery passed for **0.1.0** with
+Package consistency passes for **0.1.1**; the `.claude-plugin` catalog and
+plugin manifest were verified against the marketplace and plugin manifest
+locations and name rules that the ZCode and Claude Code loaders probe.
+Native Codex discovery passed for **0.1.0** with
 **Codex CLI 0.162.0-alpha.17.2** on **2026-10-09**. These checks neither install
 into saved user settings nor execute the workflows. On-device operation,
 agent behavior and end-to-end personal Ports maintenance have not been

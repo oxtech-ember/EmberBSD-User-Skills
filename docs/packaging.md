@@ -3,7 +3,9 @@
 This package uses the same portable Agent Plugins/Agent Skills layout as
 [Ember-Agent-Skills](https://github.com/oxtech-ember/Ember-Agent-Skills/blob/main/docs/packaging.md).
 Root plugin.json is canonical. The Codex catalog and display metadata are
-optional adapters; they do not define an EmberBSD runtime or package manager.
+optional adapters, as are the bundled `.claude-plugin/marketplace.json` and
+`.claude-plugin/plugin.json` used by the ZCode and Claude Code loaders;
+they do not define an EmberBSD runtime or package manager.
 
 The entry skill routes to bundled references relative to its own directory.
 Keep the complete skill when installing it outside the source checkout.

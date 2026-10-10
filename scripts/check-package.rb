@@ -41,6 +41,19 @@ begin
   check(entry['category'] == manifest.dig('extensions', 'com.openai', 'interface', 'category'),
         'marketplace and plugin categories disagree')
 
+  client_manifest = read_json(File.join(ROOT, '.claude-plugin/plugin.json'))
+  client_catalog = read_json(File.join(ROOT, '.claude-plugin/marketplace.json'))
+  check(client_manifest['name'] == manifest['name'], 'client manifest identity disagrees')
+  check(client_manifest['version'] == manifest['version'], 'client manifest version disagrees')
+  check(client_manifest['skills'] == './skills' && File.directory?(File.join(ROOT, 'skills')),
+        'client manifest must expose the bundled skills directory')
+  check(client_catalog['name'] == catalog['name'], 'client catalog identity disagrees')
+  check(client_catalog.dig('metadata', 'version') == manifest['version'], 'client catalog version disagrees')
+  client_entry = client_catalog['plugins'].is_a?(Array) ? client_catalog['plugins'].first : nil
+  check(client_entry && client_entry['name'] == manifest['name'], 'client catalog plugin identity disagrees')
+  check(client_entry['source'] == './', 'client catalog plugin must resolve to repository root')
+  check(client_entry['version'] == manifest['version'], 'client catalog plugin version disagrees')
+
   skills = Dir.glob(File.join(ROOT, 'skills', '*', 'SKILL.md'))
   check(!skills.empty?, 'no skills found')
   skills.each do |path|
