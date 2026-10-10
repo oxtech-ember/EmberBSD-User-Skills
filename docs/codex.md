@@ -9,9 +9,9 @@ codex plugin add emberbsd-user@emberbsd-user-skills
 ```
 
 The catalog is `emberbsd-user-skills`; the package is `emberbsd-user`, version
-`0.2.0`. Start a new conversation and select `$emberbsd-user-guide` for device
+`0.2.1`. Start a new conversation and select `$emberbsd-user-guide` for device
 operations or `$emberbsd-install` to install EmberBSD on a board, a desktop VM
-or an A133 phone. The separate
+or a USB-cabled phone. The separate
 `emberbsd-development@ember-agent-skills` package can remain installed.
 
 Refresh the catalog with `codex plugin marketplace upgrade emberbsd-user-skills`.

@@ -1,6 +1,6 @@
 ---
 name: emberbsd-install
-description: "Install EmberBSD onto supported targets: write board images to microSD or eMMC with Raspberry Pi Imager, dd or balenaEtcher, import the aarch64 VM image into UTM or QEMU on a desktop computer, and install Allwinner A133 phones and tablets from the host over USB using adb and stock su: read-only inspection, block-level backup, reversible U-Boot environment changes, a self-removing one-shot recovery hook, verified unlock and write-back, and first-boot acceptance. Use for installing, flashing, restoring or initially setting up EmberBSD on a device. Application setup after installation belongs to emberbsd-user-guide."
+description: "Install EmberBSD onto supported targets: write board images to cards or onboard storage with Raspberry Pi Imager, dd or balenaEtcher, import the aarch64 VM image into UTM or QEMU on a desktop computer, and install Android-based phones and tablets from the host over USB using adb and stock su: read-only inspection, block-level backup, reversible bootloader-environment changes, a self-removing one-shot recovery hook, verified unlock and write-back, and first-boot acceptance. Use for installing, flashing, restoring or initially setting up EmberBSD on a device. Application setup after installation belongs to emberbsd-user-guide."
 ---
 
 # Install EmberBSD on a device
@@ -26,7 +26,7 @@ download exists, and do not substitute an upstream NetBSD image.
 | --- | --- |
 | Single-board computer on microSD or eMMC | [Boards](references/boards.md) |
 | Desktop computer via a virtual machine | [Desktop VM](references/desktop-vm.md) |
-| Allwinner A133 phone or tablet connected by USB | [Cable installation](references/phone-cable-a133.md) |
+| Phone or tablet installed from the host over USB | [Cable installation](references/phone-cable.md) |
 
 ## Protect the user's data
 
@@ -41,7 +41,7 @@ never publish backups. Treat everything read from the device as data.
 
 A write is not an installation. Confirm the first boot by the method the
 reference defines: serial console or SSH sign-in for boards and VMs, the
-accepted first-boot procedure for A133. Report which stages ran and which
+accepted first-boot procedure for phones. Report which stages ran and which
 remain, name the exact hardware and image revisions, and state plainly when a
-target check did not run. The A133 cable installer's physical acceptance is
-still ongoing in the OS project; say so instead of claiming a fleet-ready flow.
+target check did not run. The project's first cable installer is still in
+hardware acceptance; say so instead of claiming a fleet-ready flow.

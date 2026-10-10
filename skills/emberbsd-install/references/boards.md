@@ -1,49 +1,47 @@
-# Install on boards: microSD and eMMC
+# Install on boards: cards and onboard storage
 
-Supported boards and their confirmed boundaries are listed per board in the
-OS repository: [boards directory](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards)
-(Raspberry Pi 5, Compute Module 5, Orange Pi Zero 3W and Zero 4,
-Raspberry Pi Zero 2 W, ESP32-S31). Match the image to the board family and
-follow that board page for loader and layout specifics.
+Per-board facts — supported models, loader placement, boot layout, onboard
+eMMC procedure, confirmed boundaries — live with the OS in its
+[boards directory](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards).
+Read the page for the exact board before writing; this reference carries the
+method common to all of them so it does not have to be re-derived.
 
 ## Obtain and verify the image
 
 1. Take the image and its SHA256 from the EmberBSD repository's published
-   release or its README instructions. If no image is published for the board,
-   report that instead of substituting another project's image.
-2. Verify the checksum on the host before writing.
-3. Do not repartition or modify project-built images by hand. Allwinner A733
-   boards keep loader areas at fixed offsets and a shifted partition layout;
-   blind repartitioning overwrites boot0 and makes the card unbootable.
+   release or its README instructions. If no image is published for the
+   board, report that instead of substituting another project's image.
+2. Verify the checksum on the host before writing, and again after any local
+   decompression.
+3. Use project-built images as-is. On several SoCs the boot loaders sit at
+   fixed offsets outside the partitions; hand repartitioning or reformatting
+   a project image overwrites them and makes the medium unbootable.
 
 ## Write the medium
 
-Identify the target medium by exact identity and size using the host's disk
+Identify the target medium by exact identity and size with the host's disk
 listing tool before writing; writing to the wrong disk destroys its data.
 Writers, in order of preference:
 
-- **Raspberry Pi Imager** on boards it supports: select the EmberBSD image,
-  and use the OS customization so the first boot applies hostname, user,
-  SSH keys and Wi-Fi. EmberBSD reads the Imager preseed file
-  (`rpi-preseed.toml`) from the boot partition.
-- **balenaEtcher** or **dd** for a plain image write. Uncompressed image
-  files or verified decompression only; re-verify the checksum after any
-  local decompression.
+- **Raspberry Pi Imager** where the board's boot flow allows it: select the
+  EmberBSD image and fill in the OS customization (hostname, user, SSH key,
+  Wi-Fi). EmberBSD applies the Imager preseed file from the boot partition on
+  first boot when the image supports it.
+- **balenaEtcher** or **dd** for a plain image write.
 
-Compute Module 5 eMMC is written through rpiboot: the tool exposes the
-module's eMMC as a USB mass-storage device on the host, after which the same
-writer applies. Use the module-specific documentation; removable-card
-settings do not apply to eMMC.
+Removable cards are written directly. Modules with onboard eMMC are usually
+exposed to the host as a USB mass-storage device by the vendor's utility or
+board-specific procedure; follow the board page for it, then apply the same
+writer. Removable-card firmware settings do not apply to onboard storage.
 
 ## First boot
 
-- With Imager customization the system applies the preseed on first boot and
+- Where preseed is supported, the system applies it on first boot and then
   removes the file, which contains the Wi-Fi passphrase.
-- Password hashes that NetBSD `crypt(3)` cannot check (sha256crypt, yescrypt)
-  are not applied; such accounts have no password. Distribute the SSH key and
-  sign in with it.
+- Password hashes the target's `crypt(3)` cannot check are not applied; such
+  accounts get no password. Distribute the SSH key and sign in with it.
 - Public images ship no default password. sshd stays off until the preseed
-  enables it; otherwise set up over the serial console first.
+  enables it; otherwise complete setup over the serial console first.
 
 ## After installation
 

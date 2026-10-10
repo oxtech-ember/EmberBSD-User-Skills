@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Agent skills for using EmberBSD: OS installation, applications, device diagnostics, personal Ports and GitHub workflows.",
-    "version": "0.2.0"
+    "version": "0.2.1"
   },
   "plugins": [
     {
       "name": "emberbsd-user",
       "source": "./",
-      "version": "0.2.0",
-      "description": "Install EmberBSD on boards, desktop VMs and A133 phones, operate devices, configure applications, diagnose faults, and maintain personal Ports and GitHub workflows.",
+      "version": "0.2.1",
+      "description": "Install EmberBSD on boards, desktop VMs and USB-cabled phones, operate devices, configure applications, diagnose faults, and maintain personal Ports and GitHub workflows.",
       "category": "developer-tools",
       "icon": "https://raw.githubusercontent.com/oxtech-ember/EmberBSD-User-Skills/main/assets/emberbsd-logo.png"
     }

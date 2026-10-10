@@ -4,11 +4,13 @@ Agent skills for people using [EmberBSD](https://github.com/oxtech-ember/EmberBS
 install and configure applications, diagnose devices, and maintain personal
 software changes through their own Ports repository and GitHub.
 
-Version **0.2.0** provides two skills:
+Version **0.2.1** provides two skills:
 [`emberbsd-install`](skills/emberbsd-install/SKILL.md) for installing
-EmberBSD onto boards, desktop virtual machines, and A133 phones connected by
-USB, and [`emberbsd-user-guide`](skills/emberbsd-user-guide/SKILL.md) with
+EmberBSD onto boards, desktop virtual machines, and USB-cabled phones, and
+[`emberbsd-user-guide`](skills/emberbsd-user-guide/SKILL.md) with
 focused references for applications, diagnostics, personal Ports, and GitHub.
+Install methods stay device-general; board-specific procedures live in the
+[OS repository](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards).
 It uses the portable [Agent Plugins](https://agent-plugins.org/) and
 [Agent Skills](https://agentskills.io/home) formats.
 
@@ -48,9 +50,9 @@ Other tasks include installing an application, configuring a service, and
 collecting evidence for a device fault. Installation of the OS itself is a
 separate skill with its own references:
 
-- [Boards: microSD and eMMC](skills/emberbsd-install/references/boards.md)
+- [Boards: cards and onboard storage](skills/emberbsd-install/references/boards.md)
 - [Desktop VM](skills/emberbsd-install/references/desktop-vm.md)
-- [Cable installation of A133 phones](skills/emberbsd-install/references/phone-cable-a133.md)
+- [Cable installation of phones](skills/emberbsd-install/references/phone-cable.md)
 
 Instructions are loaded as needed:
 
@@ -91,7 +93,7 @@ and [Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) own their
 application contracts and device operations when implemented. Skills explain
 how to use real tools; they do not create substitute APIs.
 
-Package consistency passes for **0.2.0**; the `.claude-plugin` catalog and
+Package consistency passes for **0.2.1**; the `.claude-plugin` catalog and
 plugin manifest were verified against the marketplace and plugin manifest
 locations and name rules that the ZCode and Claude Code loaders probe.
 Native Codex discovery passed for **0.1.0** with
