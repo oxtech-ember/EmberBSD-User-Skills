@@ -53,6 +53,9 @@ begin
   check(client_entry && client_entry['name'] == manifest['name'], 'client catalog plugin identity disagrees')
   check(client_entry['source'] == './', 'client catalog plugin must resolve to repository root')
   check(client_entry['version'] == manifest['version'], 'client catalog plugin version disagrees')
+  check(client_entry['icon'] == 'https://raw.githubusercontent.com/oxtech-ember/EmberBSD-User-Skills/main/assets/emberbsd-logo.png' &&
+        File.file?(File.join(ROOT, 'assets/emberbsd-logo.png')),
+        'client catalog icon must point at the bundled asset')
 
   skills = Dir.glob(File.join(ROOT, 'skills', '*', 'SKILL.md'))
   check(!skills.empty?, 'no skills found')

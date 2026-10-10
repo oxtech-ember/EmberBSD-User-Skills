@@ -4,7 +4,7 @@ Agent skills for people using [EmberBSD](https://github.com/oxtech-ember/EmberBS
 install and configure applications, diagnose devices, and maintain personal
 software changes through their own Ports repository and GitHub.
 
-Version **0.1.1** provides one entry skill,
+Version **0.1.2** provides one entry skill,
 [`emberbsd-user-guide`](skills/emberbsd-user-guide/SKILL.md), with focused
 references for applications, diagnostics, personal Ports, and GitHub.
 It uses the portable [Agent Plugins](https://agent-plugins.org/) and
@@ -81,7 +81,7 @@ and [Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) own their
 application contracts and device operations when implemented. Skills explain
 how to use real tools; they do not create substitute APIs.
 
-Package consistency passes for **0.1.1**; the `.claude-plugin` catalog and
+Package consistency passes for **0.1.2**; the `.claude-plugin` catalog and
 plugin manifest were verified against the marketplace and plugin manifest
 locations and name rules that the ZCode and Claude Code loaders probe.
 Native Codex discovery passed for **0.1.0** with

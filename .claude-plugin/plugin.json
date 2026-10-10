@@ -1,6 +1,6 @@
 {
   "name": "emberbsd-user",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Agent skills for EmberBSD users: applications, device diagnostics, personal Ports and GitHub workflows.",
   "author": {
     "name": "neonix20b",
