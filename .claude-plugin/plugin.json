@@ -1,7 +1,7 @@
 {
   "name": "emberbsd-user",
-  "version": "0.1.2",
-  "description": "Agent skills for EmberBSD users: applications, device diagnostics, personal Ports and GitHub workflows.",
+  "version": "0.2.0",
+  "description": "Agent skills for EmberBSD users: OS installation onto boards, desktop VMs and A133 phones, applications, device diagnostics, personal Ports and GitHub workflows.",
   "author": {
     "name": "neonix20b",
     "url": "https://github.com/neonix20b"
@@ -9,6 +9,14 @@
   "homepage": "https://github.com/oxtech-ember/EmberBSD-User-Skills",
   "repository": "https://github.com/oxtech-ember/EmberBSD-User-Skills",
   "license": "MIT",
-  "keywords": ["emberbsd", "user", "applications", "personal-ports", "skills", "agent-plugins"],
+  "keywords": [
+    "emberbsd",
+    "user",
+    "installation",
+    "applications",
+    "personal-ports",
+    "skills",
+    "agent-plugins"
+  ],
   "skills": "./skills"
 }

@@ -4,9 +4,11 @@ Agent skills for people using [EmberBSD](https://github.com/oxtech-ember/EmberBS
 install and configure applications, diagnose devices, and maintain personal
 software changes through their own Ports repository and GitHub.
 
-Version **0.1.2** provides one entry skill,
-[`emberbsd-user-guide`](skills/emberbsd-user-guide/SKILL.md), with focused
-references for applications, diagnostics, personal Ports, and GitHub.
+Version **0.2.0** provides two skills:
+[`emberbsd-install`](skills/emberbsd-install/SKILL.md) for installing
+EmberBSD onto boards, desktop virtual machines, and A133 phones connected by
+USB, and [`emberbsd-user-guide`](skills/emberbsd-user-guide/SKILL.md) with
+focused references for applications, diagnostics, personal Ports, and GitHub.
 It uses the portable [Agent Plugins](https://agent-plugins.org/) and
 [Agent Skills](https://agentskills.io/home) formats.
 
@@ -43,7 +45,14 @@ Success means the requested behavior works on the target. A completed build
 alone is not enough.
 
 Other tasks include installing an application, configuring a service, and
-collecting evidence for a device fault. Instructions are loaded as needed:
+collecting evidence for a device fault. Installation of the OS itself is a
+separate skill with its own references:
+
+- [Boards: microSD and eMMC](skills/emberbsd-install/references/boards.md)
+- [Desktop VM](skills/emberbsd-install/references/desktop-vm.md)
+- [Cable installation of A133 phones](skills/emberbsd-install/references/phone-cable-a133.md)
+
+Instructions are loaded as needed:
 
 - [Tools and targets](skills/emberbsd-user-guide/references/tools-and-targets.md)
 - [Applications](skills/emberbsd-user-guide/references/applications.md)
@@ -58,7 +67,8 @@ Use your client's documented installation mechanism:
 1. For Agent Plugins with skills support, load the repository root and select
    `emberbsd-user`.
 2. For Agent Skills support, load the complete `skills/emberbsd-user-guide/`
-   directory, including its references and the repository's MIT license.
+   and `skills/emberbsd-install/` directories, including their references and
+   the repository's MIT license.
 3. For manual use, ask the assistant to read `SKILL.md` and the relevant linked
    references. This does not register automatic discovery.
 
@@ -81,7 +91,7 @@ and [Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) own their
 application contracts and device operations when implemented. Skills explain
 how to use real tools; they do not create substitute APIs.
 
-Package consistency passes for **0.1.2**; the `.claude-plugin` catalog and
+Package consistency passes for **0.2.0**; the `.claude-plugin` catalog and
 plugin manifest were verified against the marketplace and plugin manifest
 locations and name rules that the ZCode and Claude Code loaders probe.
 Native Codex discovery passed for **0.1.0** with

@@ -1,0 +1,4 @@
+interface:
+  display_name: "EmberBSD Install"
+  short_description: "Install EmberBSD on boards, VMs and A133 phones"
+  default_prompt: "Use $emberbsd-install to install EmberBSD on my device, verify the write and confirm the first boot."
