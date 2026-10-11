@@ -1,6 +1,6 @@
 {
   "name": "emberbsd-user",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Agent skills for EmberBSD users: OS installation onto boards, desktop VMs and USB-cabled phones, applications, device diagnostics, personal Ports and GitHub workflows.",
   "author": {
     "name": "neonix20b",
