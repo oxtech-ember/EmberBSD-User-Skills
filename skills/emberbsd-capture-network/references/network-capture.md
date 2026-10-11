@@ -18,11 +18,12 @@ If `emberbsd-manage-app` is available, use it.
 Do not invent SDK or Runtime commands.
 
 Select the interface, peer, direction, duration, and private output path.
+Set `LOCAL_ADDR` to the selected interface's local address.
 Run only the measurements authorized for that peer.
 
 ```sh
-iperf3 -c "$PEER" -t 10 -J
-iperf3 -c "$PEER" -t 10 -R -J
+iperf3 -c "$PEER" --bind "$LOCAL_ADDR" -t 10 -J
+iperf3 -c "$PEER" --bind "$LOCAL_ADDR" -t 10 -R -J
 dumpcap -i "$IFACE" -b filesize:1024 -b files:4 -a duration:30 -w "$CAPTURE"
 ```
 
