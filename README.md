@@ -4,7 +4,7 @@ Agent skills for people using [EmberBSD](https://github.com/oxtech-ember/EmberBS
 install and configure applications, diagnose devices, and maintain personal
 software changes through their own Ports repository and GitHub.
 
-Version **0.2.1** provides two skills:
+Version **0.2.3** provides two skills:
 [`emberbsd-install`](skills/emberbsd-install/SKILL.md) for installing
 EmberBSD onto boards, desktop virtual machines, and USB-cabled phones, and
 [`emberbsd-user-guide`](skills/emberbsd-user-guide/SKILL.md) with
@@ -93,17 +93,18 @@ and [Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) own their
 application contracts and device operations when implemented. Skills explain
 how to use real tools; they do not create substitute APIs.
 
-Package consistency passes for **0.2.1**; the `.claude-plugin` catalog and
+Package consistency passes for **0.2.3**; the `.claude-plugin` catalog and
 plugin manifest were verified against the marketplace and plugin manifest
 locations and name rules that the ZCode and Claude Code loaders probe.
-Native Codex discovery passed for **0.1.0** with
-**Codex CLI 0.162.0-alpha.17.2** on **2026-10-09**. These checks neither install
+Native Codex discovery and plugin/skill icon path resolution passed for **0.2.3**
+with **Codex CLI 0.159.2** on **2026-10-11**. These checks neither install
 into saved user settings nor execute the workflows. On-device operation,
 agent behavior and end-to-end personal Ports maintenance have not been
-validated by these checks. Other clients remain untested for this release.
+validated by these checks. Desktop icon rendering and other clients remain
+untested for this release.
 
 Run `ruby scripts/check-package.rb` for consistency, or add `--codex` for
-isolated native discovery. See [packaging and acceptance](docs/packaging.md)
+isolated native discovery and icon path checks. See [packaging and acceptance](docs/packaging.md)
 for the check boundaries and behavioral scenarios.
 
 ## License

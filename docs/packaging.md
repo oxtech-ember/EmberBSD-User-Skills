@@ -11,14 +11,19 @@ The entry skill routes to bundled references relative to its own directory.
 Keep the complete skill when installing it outside the source checkout.
 Retain the MIT license. Do not copy root AGENTS.md into users' application repos.
 
+Codex plugin icons live in root `assets/`; each skill also bundles its icon
+under its own `assets/` so standalone installation works. See the
+[Codex metadata and path bases](codex.md#icon-packaging-lesson).
+
 Run `ruby scripts/check-package.rb` to check the manifest/catalog identity,
-version, skill metadata and bundled entry-point references. The checker was
-adapted from Ember-Agent-Skills under MIT. It is a local consistency check,
+version, skill metadata, icon assets and bundled entry-point references. The
+checker was adapted from Ember-Agent-Skills under MIT. It is a local consistency check,
 not a full schema validator.
 
 Run `ruby scripts/check-package.rb --codex` with an available Codex CLI to check
-native discovery in a temporary profile. It does not change saved settings,
-install the plugin or execute an agent. See [the adapter](codex.md).
+native discovery and plugin/skill icon paths in temporary profiles. The icon
+check uses the app-server `plugin/read` method. It does not change saved settings,
+install the plugin, execute an agent or prove desktop rendering. See [the adapter](codex.md).
 
 ## Behavioral acceptance scenarios
 

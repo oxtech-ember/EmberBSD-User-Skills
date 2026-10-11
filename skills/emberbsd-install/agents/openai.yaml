@@ -1,4 +1,6 @@
 interface:
   display_name: "EmberBSD Install"
   short_description: "Install EmberBSD on boards, VMs and phones"
+  icon_small: "./assets/emberbsd-logo.png"
+  icon_large: "./assets/emberbsd-logo.png"
   default_prompt: "Use $emberbsd-install to install EmberBSD on my device, verify the write and confirm the first boot."

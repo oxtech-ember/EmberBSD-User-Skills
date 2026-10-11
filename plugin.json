@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "emberbsd-user",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Agent skills for EmberBSD users: OS installation onto boards, desktop VMs and USB-cabled phones, applications, device diagnostics, personal Ports and GitHub workflows.",
   "author": {
     "name": "neonix20b",
@@ -28,6 +28,8 @@
         "developerName": "neonix20b",
         "category": "Developer Tools",
         "websiteURL": "https://github.com/oxtech-ember/EmberBSD-User-Skills",
+        "composerIcon": "./assets/emberbsd-logo.png",
+        "logo": "./assets/emberbsd-logo.png",
         "defaultPrompt": [
           "Use $emberbsd-install to install EmberBSD on my device and confirm the first boot.",
           "Use $emberbsd-user-guide to complete my EmberBSD user task and verify the result."
