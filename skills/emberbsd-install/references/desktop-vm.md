@@ -1,31 +1,37 @@
-# Install on a desktop computer: virtual machine
+# Desktop VM installation
 
-EmberBSD currently builds and boots as an aarch64 system. On a desktop
-computer the supported path is a virtual machine with a ready-made image, not
-bare-metal installation: there is no x86-64 port, and an x86 host runs the
-aarch64 guest under QEMU emulation with its performance and device limits.
-State that boundary instead of promising a native desktop installation.
+Use an aarch64 guest, not an assumed x86-64 or bare-metal desktop port. Apple
+Silicon may use UTM/QEMU with HVF; other hosts require documented QEMU emulation
+and its limits. Discover the actual artifact's requirements:
 
-## Import the image
+```sh
+git -C "$OS_SRC" ls-files 'ember/image/*' 'ember/boot/*utm*'
+command -v qemu-img qemu-system-aarch64
+qemu-system-aarch64 --version
+qemu-system-aarch64 -machine help
+```
 
-1. Obtain the published aarch64 VM image (qcow2) and its SHA256 from the
-   EmberBSD repository's releases or README instructions; verify before use.
-   If no public VM image is published yet, report that rather than building
-   an unofficial one silently.
-2. On Apple Silicon, import into UTM: an ARM64 QEMU `virt` machine with UEFI
-   firmware, VirtIO disk and network, several CPUs and gigabytes of RAM, and
-   a serial console attached. Attach the qcow2 as its disk.
-3. On other hosts, use plain QEMU with the same machine type, firmware and
-   VirtIO devices. Reproducible examples of EmberBSD VM scenarios live in
-   [EmberBSD-Examples](https://github.com/oxtech-ember/EmberBSD-Examples).
+Use published qcow2/checksum when available. The OS-owned
+[development image](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/image)
+declares verified NetBSD 11 base sets plus accepted EmberBSD components; it is
+separate from a complete general release. Use its builder only for a requested
+development image, never silently as a substitute for a missing release.
 
-## First boot
+Verify the hash, then inspect the image offline:
 
-The serial console is the primary interface before network configuration.
-Sign in on the console, set the root password or create a user, and enable
-sshd deliberately; VM images ship no default password. The same preseed
-rules as boards apply when the image supports them.
+```sh
+qemu-img info --output=json "$IMAGE"
+qemu-img check "$IMAGE"
+```
 
-Virtual machines are also the project's acceptance environment for package
-installation and graphics scenarios; running software inside the VM after
-setup belongs to `emberbsd-user-guide`.
+Use the owning launch recipe: aarch64 `virt`, matching UEFI, VirtIO disk/network,
+serial console, documented CPU/RAM/backend. UTM UI configuration does not supply
+a universal QEMU command. Graphics details live in
+[the OS framebuffer workflow](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/boot/utm-framebuffer.md)
+and [Examples](https://github.com/oxtech-ember/EmberBSD-Examples/tree/main/desktop).
+
+Accept console sign-in, configure authorized account/SSH access and test a normal
+reboot. Read image-specific login defaults: the documented development image
+permits passwordless console root and disables SSH. Preseed applies only if
+integrated. Record image/kernel revisions, firmware, host/backend and results;
+VM success does not validate a physical board.

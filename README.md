@@ -1,12 +1,12 @@
 # EmberBSD User Skills
 
-Agent skills for people using [EmberBSD](https://github.com/oxtech-ember/EmberBSD):
-install and configure applications, diagnose devices, and maintain personal
-software changes through their own Ports repository and GitHub.
+Instructions for AI agents assisting [EmberBSD](https://github.com/oxtech-ember/EmberBSD)
+users: operate real CLI/API tools, diagnose devices, and maintain personal
+software changes through the user's Ports repository and GitHub.
 
 Version **0.2.3** provides two skills:
-[`emberbsd-install`](skills/emberbsd-install/SKILL.md) for installing
-EmberBSD onto boards, desktop virtual machines, and USB-cabled phones, and
+[`emberbsd-install`](skills/emberbsd-install/SKILL.md) for installation discovery
+and acceptance on boards, desktop virtual machines, and USB-cabled phones, and
 [`emberbsd-user-guide`](skills/emberbsd-user-guide/SKILL.md) with
 focused references for applications, diagnostics, personal Ports, and GitHub.
 Install methods stay device-general; board-specific procedures live in the
@@ -31,6 +31,10 @@ They discover the available tools and follow their documented interfaces.
 This release contains instructions and packaging checks. It does not supply
 an on-device agent, package manager, GitHub client, credentials, MCP server,
 or implemented SDK/Runtime interfaces.
+The current OS tree has no executable phone installer or YS-M33 stage documents;
+the phone reference permits authorized inspection and identifies that blocker.
+The OS-owned development VM image has its own declared input provenance;
+a general validated installation image remains separate.
 
 ## Start with a user task
 

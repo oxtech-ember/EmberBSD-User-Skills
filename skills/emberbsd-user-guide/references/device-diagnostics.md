@@ -1,57 +1,60 @@
-# Device diagnostics
+# Device and application diagnostics
 
-Start with the symptom, expected behavior and selected target. Inspect the
-smallest useful evidence: relevant process/service state, device enumeration,
-logs, resource usage or a reproducer. Commands such as `dmesg`, `sysctl`,
-`ifconfig` and `netstat` may help; verify availability and exact options locally.
-Keep credentials, addresses and private content out of public reports.
+Start with [target discovery](tools-and-targets.md), the symptom and expected
+behavior. Capture the smallest relevant read-only evidence:
 
-Separate an application failure from its dependencies, device interface,
-permissions, driver, network and firmware. Compare observations with the
-current board documentation in
-[EmberBSD](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards).
-A related SoC or a successful VM run does not establish physical-device support.
+| Layer | Installed command candidates |
+| --- | --- |
+| Kernel/device | `dmesg`, `drvctl -l`; `drvctl -l "$PARENT"` for the selected subtree |
+| Process/package | `ps -ax -o pid,comm`, `pkg_info -B "$PACKAGE"`, `pkg_info -L "$PACKAGE"` |
+| Network | `ifconfig "$IFACE"`, `netstat -rn` |
+| Camera | `ls -l /dev/video*`, then `videoctl -d "$VIDEO_DEVICE" -a` |
+| Bluetooth | `btconfig -l` |
 
-Fix the demonstrated cause within the task's scope and retest the failed case.
-Keep a focused regression when changing source. Use service restart or reboot
-when the diagnosis and task call for it; coordinate shared target access when
-another active task could be interrupted. Do not reboot every reachable board
-because a log mentions EmberBSD.
+Check local manuals and derive names from enumeration. Query commands do not
+prove capture, throughput or pairing. Reproduce with the app's real CLI/API;
+inspect its config, backend and dependencies. Source ownership is OS
+`usr.bin/videoctl`/driver/board pages, Ports recipe/profile, or the app. For media,
+read [Ports' media probe](https://github.com/oxtech-ember/EmberBSD-Ports/tree/main/probes/media):
+its documented OpenCV backend choices and VM checks do not establish physical
+camera support. SDK/Runtime names do not supply diagnostic commands.
 
-For boot media, firmware or a whole-system update, establish the exact target,
-artifact provenance and recovery path before writing. Do not mix kernels and
-modules from different builds. If target access is missing, state that concrete
-limitation and continue useful host-side work without presenting it as a device
-check.
+Repair the demonstrated cause within scope, preserve personal patches, and
+retest the failed behavior plus affected regressions. Read the
+[exact board page](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards);
+a similar SoC or VM result does not establish hardware support. Coordinate
+shared access before disruptive restart/reboot. Firmware/media/system writes
+need exact artifact provenance, matching kernel/modules and a recovery path;
+route installation to `emberbsd-install`.
 
-## Network diagnostics on the device
+## Packet and HCI evidence
 
-For connectivity and throughput problems, capture evidence instead of arguing
-from symptoms. The [network diagnostics kit](https://github.com/oxtech-ember/EmberBSD-Ports/tree/main/profiles/network-diagnostics)
-ships libpcap, tcpdump, iperf3 and the Wireshark CLI tools (dumpcap, tshark,
-capinfos, editcap, mergecap) as installable packages, plus `hcisnoop` for
-Bluetooth HCI recording. Check `pkg_info` first; a missing tool is a package
-to install, not a missing capability.
+The [Ports network profile](https://github.com/oxtech-ember/EmberBSD-Ports/tree/main/profiles/network-diagnostics)
+owns capture/analysis packages and `hcisnoop`. Check `command -v` and
+`pkg_info`; install missing supported tools via [applications](applications.md).
+Select interface, peer, direction, duration and a private output location.
+Capture only task-relevant traffic; traces may contain credentials/personal data.
+Ring mode suffixes the `-w` base: select an actual generated file as `TRACE`
+before offline analysis.
 
-- The packaged tcpdump drops privileges and chroots to `/var/tcpdump`, so run
-  it from that directory and write captures with a relative `-w` name; the
-  directory must belong to the `_tcpdump` account. Absolute paths outside the
-  chroot fail with a confusing "No such file or directory".
-- Measure throughput with an explicit peer and direction (`iperf3 -c`, `-R`
-  for reverse), record protocol, duration and the reported loss and jitter
-  instead of quoting one bitrate. Wi-Fi and wired results are not
-  interchangeable.
-- `dumpcap -b filesize:KB -a files:N` records a ring buffer of pcapng files;
-  under heavy traffic read the interface drop counters it reports rather than
-  trusting the captured packet count.
-- On the device, `tshark -r`, `capinfos`, `editcap` and `mergecap` read,
-  inspect and transform captured files; copy pcaps, pcapng and BTSnoop traces
-  to the analysis machine for interactive inspection.
-- `hcisnoop -o FILE` records the native Bluetooth HCI tap to BTSnoop that
-  Wireshark opens as "Bluetooth HCI H4". On minimal images the controller may
-  need manual bring-up (loading its module and `btattach`) before any HCI
-  traffic exists; confirm the unit with `btconfig -l` and record pairing or
-  ACL/SCO traffic separately from a scan.
+```sh
+iperf3 -c "$PEER" -t 10 -J
+iperf3 -c "$PEER" -t 10 -R -J
+dumpcap -i "$IFACE" -b filesize:1024 -b files:4 -a duration:30 -w "$CAPTURE"
+capinfos "$TRACE"
+tshark -r "$TRACE"
+btconfig -l
+hcisnoop -o "$BTSNOOP"
+```
 
-Close with the cause or current hypothesis, changes, verification and remaining
-unknowns. A diagnostic collection alone is not a repaired user scenario.
+Check help before use and stop HCI capture after the selected event. For packaged
+tcpdump, `cd /var/tcpdump`, verify directory ownership `_tcpdump`, then run
+`tcpdump -i "$IFACE" -s 0 -w capture.pcap` with required capture privileges.
+Its privilege-drop/chroot makes outside absolute output paths fail.
+
+Record protocol, peer/direction, duration, loss/jitter and capture drop counters;
+Wi-Fi and wired results differ. Ring buffering bounds storage. Bluetooth may
+require the OS's model-specific module/`btattach` setup; distinguish scans from
+pairing/ACL/SCO traffic. Use `editcap`/`mergecap` per help for private trace
+processing. Return cause/hypothesis, repair, verification and unknowns; diagnostic
+collection alone is not a repaired scenario.

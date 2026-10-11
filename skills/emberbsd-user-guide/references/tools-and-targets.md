@@ -1,32 +1,52 @@
 # Discover tools and targets
 
-Identify which commands run on the assistant's host and which run on the
-EmberBSD device. Reuse the user-selected connection; do not choose a different
-board just because it responds. Inspect the reported OS, architecture and
-installed release information. Retained NetBSD ABI names do not prove that
-an image contains current EmberBSD components.
+Run discovery in the selected device shell. For existing authorized SSH access,
+use a noninteractive connection with a 10s connection timeout; set `TARGET`
+from that selected connection:
 
-Use narrow, read-only discovery. Depending on what is installed, `uname`,
-`command -v`, `pkg_info`, `ps`, `df` and a tool's local manual/help can establish
-the environment. Do not assume Linux-specific service commands or `/proc`.
-Check the target's actual service/configuration mechanism before editing it.
+```sh
+ssh -o BatchMode=yes -o ConnectTimeout=10 "$TARGET" \
+  'uname -srm && id && df -h'
+```
 
-For an application task, establish the package manager, repositories, package
-version, configuration location, running process and required device access.
-For a source task, inspect Git remotes, branch, local changes and the recipe's
-documented build commands. Keep host paths and target paths distinct.
+The connection timeout does not bound remote command execution; use the available
+runner's overall timeout when needed. Then inspect installed tools in its shell
+or through the existing connector:
 
-Prefer a tool's structured output when documented, preserve its exit status,
-and collect only the diagnostics needed for the task. Do not dump tokens,
-process environments or unrelated private files into reports.
+```sh
+uname -a
+id
+command -v pkg_info pkg_add pkgin ps df dmesg sysctl
+pkg_info -a
+ps -ax -o pid,comm
+df -h
+```
 
-Use installed connectors, command-line tools or SSH according to their actual
-capabilities and permissions. A missing tool is a specific dependency to resolve,
-not evidence that an imagined SDK command exists. Check the current contents of
+Keep host/device paths distinct. Inspect installed commands' manuals/options and
+actual release provenance. NetBSD ABI names alone do not identify current EmberBSD.
+Use narrow output; keep tokens, addresses, personal files and process
+environments out of public reports. Prefer documented structured output and
+retain each exit status before dependent actions. `git grep`/`rg` status 1 means
+no match; errors need diagnosis. Missing access blocks target checks, not host work.
+
+For source tasks, set `OS_SRC`, `PORTS_SRC` and `EXAMPLES_SRC` to available selected
+checkouts; otherwise inspect their linked public sources. Discover owners:
+
+```sh
+git -C "$OS_SRC" rev-parse HEAD
+git -C "$PORTS_SRC" status --short --branch
+git -C "$PORTS_SRC" ls-files 'profiles/*/README.md' 'probes/*/README.md'
+git -C "$EXAMPLES_SRC" ls-files '*README.md' '*.sh'
+```
+
+Read the applicable README, recipe, configuration and help before execution.
+Use `git grep` or `rg` for focused source lookup. Do not assume Linux
+`systemctl` or `/proc` on EmberBSD; discover its actual rc/service mechanism.
+
 [SDK](https://github.com/oxtech-ember/EmberBSD-SDK) and
-[Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) before using their
-interfaces. Repository ownership does not establish an implemented service.
-
-For cross builds, use the owning recipe and an EmberBSD sysroot with known source
-revisions. Do not silently replace base libraries, headers or the kernel with
-upstream NetBSD components. Run acceptance on the intended VM or device.
+[Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) currently describe
+design boundaries, with no released CLI/API. Recheck current sources before
+using future interfaces. Existing operations belong to OS, Ports and Examples;
+skills route to those tools instead of implementing wrappers. Cross builds
+use the owning recipe and provenanced EmberBSD sysroot; declared development
+images may have explicit NetBSD inputs. Never silently substitute base parts.

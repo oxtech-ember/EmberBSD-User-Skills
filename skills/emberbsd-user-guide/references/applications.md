@@ -1,30 +1,33 @@
-# Applications
+# Application operations
 
-Establish the requested behavior, current package/version, target architecture
-and package source. Inspect the installed package manager's help and repository
-configuration. Use existing package tools such as pkg_tools or pkgin only when
-available; do not assume their presence or invent an EmberBSD wrapper.
+Identify requested behavior, architecture, package/version, repository and
+configuration. With installed pkg_tools, inspect before changing anything:
 
-Inspect the proposed transaction and affected dependencies. Prefer a current
-supported release. When a needed modern version is unavailable, inspect
-[EmberBSD-Ports](https://github.com/oxtech-ember/EmberBSD-Ports) and the actual
-recipe before choosing a build path. Age in a pkgsrc snapshot is not a reason
-to select an obsolete application. Keep one coherent dependency set; repair
-consumers instead of adding a permanent old library for each application.
+```sh
+pkg_info -e "$PACKAGE"
+pkg_info -B "$PACKAGE"
+pkg_info -L "$PACKAGE"
+pkg_info -N "$PACKAGE"
+pkg_info -R "$PACKAGE"
+```
 
-Apply the requested installation or configuration with the existing tools.
-Preserve user data and unrelated settings. An application request does not
-implicitly request a whole-system upgrade, reboot or firmware replacement.
-For removal, distinguish package removal from deletion of user documents and
-configuration. Follow the user's intended retention rather than erasing them
-as an incidental cleanup step.
+Read `man pkg_add`, `man pkg_delete`, or installed `pkgin help`. For a selected
+archive, `pkg_add -n "$ARCHIVE"` previews its transaction; inspect dependencies,
+then use the actual tool's authorized install/update/remove command. Do not
+invent an EmberBSD package wrapper or whole-system upgrade. Preserve user data,
+unrelated settings and intended retention on removal.
 
-Verify startup, required functionality and persistence where relevant. For a
-service, check its actual lifecycle mechanism, a meaningful request and failure
-behavior. For a graphical app, a command-line version string alone does not
-prove a working window. For a camera app, compilation alone does not prove
-capture from the selected camera.
+If a needed current release is absent, inspect
+[Ports](https://github.com/oxtech-ember/EmberBSD-Ports) and its owning recipe/build
+instructions. Do not choose obsolete software merely because a snapshot
+contains it. Keep one coherent dependency set and repair its consumers.
 
-If the desired behavior requires source edits, use [personal Ports](personal-ports.md).
-A common portability fix may be prepared separately through the developer
-skills when contributing that fix is part of the task.
+Discover service ownership from package file lists and actual rc files. Use
+the selected rc script's documented `status`/`start`/`restart` only when it
+implements those actions. Validate a meaningful request and relevant failure
+case, plus persistence when requested. Graphical apps need visible window/input;
+camera apps need capture from the selected camera. Version strings and builds
+do not establish either.
+
+Source customization uses [personal Ports](personal-ports.md); shared
+contributions use developer skills only when requested.

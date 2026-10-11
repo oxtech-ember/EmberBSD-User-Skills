@@ -1,50 +1,39 @@
-# Install on boards: cards and onboard storage
+# Board media installation
 
-Per-board facts — supported models, loader placement, boot layout, onboard
-eMMC procedure, confirmed boundaries — live with the OS in its
-[boards directory](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards).
-Read the page for the exact board before writing; this reference carries the
-method common to all of them so it does not have to be re-derived.
+Read the exact page in [the OS board catalog](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards)
+for support evidence, loader offsets, boot layout and eMMC exposure procedure.
+Discover artifacts through current releases when GitHub CLI is available:
 
-## Obtain and verify the image
+```sh
+gh release list --repo oxtech-ember/EmberBSD
+gh release view "$RELEASE" --repo oxtech-ember/EmberBSD --json tagName,assets
+```
 
-1. Take the image and its SHA256 from the EmberBSD repository's published
-   release or its README instructions. If no image is published for the
-   board, report that instead of substituting another project's image.
-2. Verify the checksum on the host before writing, and again after any local
-   decompression.
-3. Use project-built images as-is. On several SoCs the boot loaders sit at
-   fixed offsets outside the partitions; hand repartitioning or reformatting
-   a project image overwrites them and makes the medium unbootable.
+Follow the selected release/README download procedure. For SHA256, select an
+installed host command: `shasum -a 256 "$IMAGE"`, `sha256sum "$IMAGE"`, or
+`sha256 -q "$IMAGE"`. Compare the published digest; verify decompressed bytes
+against their documented digest. Missing image/checksum blocks writing. Never
+substitute another project's release; declared development-image inputs retain
+their own provenance.
 
-## Write the medium
+Identify exact medium and size: `diskutil list` on macOS,
+`lsblk -o NAME,SIZE,MODEL,SERIAL,MOUNTPOINTS` on Linux, or local disk manuals
+elsewhere. Check device/data-loss authorization, unmount its filesystems, then follow the
+board's writer. For `dd`, `IMAGE` must be the verified uncompressed raw
+whole-disk image, not a compressed archive or qcow2. Use the host's documented `dd`:
 
-Identify the target medium by exact identity and size with the host's disk
-listing tool before writing; writing to the wrong disk destroys its data.
-Writers, in order of preference:
+```sh
+dd if="$IMAGE" of="$DISK" bs=1048576 && sync
+```
 
-- **Raspberry Pi Imager** where the board's boot flow allows it: select the
-  EmberBSD image and fill in the OS customization (hostname, user, SSH key,
-  Wi-Fi). EmberBSD applies the Imager preseed file from the boot partition on
-  first boot when the image supports it.
-- **balenaEtcher** or **dd** for a plain image write.
+Check exit status and exact image-sized read-back with the documented writer.
+Preserve image layout: loaders may sit outside partitions. Use onboard eMMC's
+documented vendor exposure method before selecting its host disk.
 
-Removable cards are written directly. Modules with onboard eMMC are usually
-exposed to the host as a USB mass-storage device by the vendor's utility or
-board-specific procedure; follow the board page for it, then apply the same
-writer. Removable-card firmware settings do not apply to onboard storage.
-
-## First boot
-
-- Where preseed is supported, the system applies it on first boot and then
-  removes the file, which contains the Wi-Fi passphrase.
-- Password hashes the target's `crypt(3)` cannot check are not applied; such
-  accounts get no password. Distribute the SSH key and sign in with it.
-- Public images ship no default password. sshd stays off until the preseed
-  enables it; otherwise complete setup over the serial console first.
-
-## After installation
-
-Application setup belongs to `emberbsd-user-guide`. Operating-system updates
-use the project's signed OTA channel as it becomes available; do not
-overwrite a running system's partitions by hand.
+Raspberry Pi Imager/balenaEtcher are alternatives where supported; do not invent
+their CLI. Imager customization requires image integration of
+[`rpi_preseed`](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/etc/rc.d/rpi_preseed).
+It removes the secret-bearing preseed after first boot. Unsupported password
+hashes leave the account without a password: verify SSH-key access. Read actual
+console/sshd defaults and accept sign-in on the selected board. For OS updates,
+discover the current procedure; no released signed OTA interface is assumed.

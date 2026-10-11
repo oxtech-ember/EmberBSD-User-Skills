@@ -1,57 +1,47 @@
-# Personal Ports and upstream updates
+# Personal Ports
 
-The goal is a working personal customization that follows current upstream.
-Keep the original author's source distribution, shared EmberBSD portability
-adaptations and the user's requested behavior changes identifiable.
-A personal Ports repository stores recipes/patches and their intent; it need
-not become a fork containing the complete upstream source history.
+Keep upstream distributions, shared EmberBSD adaptations and requested personal
+behavior changes identifiable. Store recipes/patches and intent in the selected
+personal repository; a full upstream fork or contribution PR is unnecessary.
 
-## Make the first customization
+1. Define a small acceptance case; inspect current release, personal changes
+   and the owning [Ports](https://github.com/oxtech-ember/EmberBSD-Ports) recipe.
+2. Preserve licenses, source URLs and integrity checks. Record upstream/shared
+   base revisions; unexpected checksum changes require investigation.
+3. Make a focused patch. Keep independent user edits and the last usable
+   version/data while testing its replacement.
+4. Use the recipe's build commands and supported cross-build path; run acceptance
+   on the selected VM/device, including the customization, ordinary behavior
+   and a relevant failure case.
+5. Save checked patches and results; publish only to the authorized personal
+   destination following [GitHub](github.md).
 
-1. Identify the user's requested behavior and a small acceptance scenario.
-   Inspect the selected program, current release and existing personal changes.
-2. Inspect the current shared Ports recipe and its build instructions. Preserve
-   upstream licenses, source URLs and integrity checks. Prefer cross-compilation
-   where the recipe supports it, with execution on the target.
-3. Reuse or create the user's selected personal repository as authorized. Read
-   [GitHub](github.md) before publication. Keep credentials and local paths out
-   of versioned files.
-4. Change the program and create a focused patch with a short explanation of
-   its purpose. Record the upstream base and any shared Ports base actually used.
-   Keep the user's independent changes intact.
-5. Build and exercise the requested behavior. Address failures before calling
-   the result ready. Publish the checked patch to the authorized personal repo,
-   using its established branch policy and normal Git operations.
+## Discover the actual patch mechanism
 
-## Follow an upstream update
+For a selected pkgsrc recipe with its configured `bmake`:
 
-Fetch the new supported upstream version and inspect relevant changes. Apply
-the shared adaptations and personal patch using the owning recipe's documented
-mechanism. A rejected hunk is a repair task: compare old and new behavior,
-update the patch, rebuild and rerun the affected acceptance cases.
+```sh
+bmake -C "$RECIPE" show-var VARNAME=PKGPATH
+bmake -C "$RECIPE" show-var VARNAME=WRKSRC
+git -C "$PORTS_SRC/upstream/pkgsrc" grep -n LOCALPATCHES -- mk/patch/patch.mk
+```
 
-A patch applying cleanly is not proof that its behavior survived. Test the
-customization and affected ordinary behavior, including a relevant failure case.
-If upstream implements the desired feature, confirm equivalence before retiring
-the patch. Do not remove the user's customization merely to make a build pass.
-Retain the last usable version and user data while validating its replacement.
+Current `LOCALPATCHES` appends `$LOCALPATCHES/$PKGPATH/*` after normal source
+patches. Confirm in the selected version; it does not edit the recipe Makefile.
+Keep external-patch hashes separately. Where applicable, exercise the recipe's
+patch stage with `bmake -C "$RECIPE" LOCALPATCHES="$PERSONAL_PATCHES" patch`,
+then its documented build/package checks. Recipe changes need a versioned diff,
+base and application command in the personal repository. No multi-repository
+overlay resolver or personal-Ports CLI is assumed.
 
-The loop is: update, diagnose, repair, verify and save the new working state.
-Record revisions and checks during that loop; do not require a separate lockfile,
-artifact service or reproducibility platform before attempting a small change.
-Unexpected source checksum changes require investigation, not blind acceptance.
+## Upstream updates
 
-## Use actual Ports mechanisms
+Fetch the supported update, compare changed behavior, apply shared then personal
+adaptations using the owning mechanism. Rejected hunks and failed tests require
+repair, rebuild and retest. Clean application/build is insufficient. Retire a
+patch only after upstream behavior matches the requested customization; never
+drop it to make a build pass.
 
-Read the current [EmberBSD-Ports documentation](https://github.com/oxtech-ember/EmberBSD-Ports).
-Do not assume that a multi-repository overlay resolver or personal-Ports CLI
-already exists. With pkgsrc, `LOCALPATCHES` applies source patches after the
-normal recipe patches; it does not modify the recipe Makefile itself. External
-patch integrity must be recorded separately. Confirm these semantics in the
-selected pkgsrc version before using them; avoid unexplained patch stacking.
-If a recipe change is needed, version it in the personal repository with its
-base and application instructions using currently available tools.
-
-A useful general fix may be offered to shared Ports or upstream when authorized.
-That is a separate contribution workflow through Ember-Agent-Skills. A personal
-repository does not require a PR to either destination.
+Record new revisions, patch hashes and checks during the loop. A separate
+artifact platform/lockfile is not a prerequisite. Useful shared fixes enter the
+developer contribution workflow only when authorized.
