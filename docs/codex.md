@@ -9,7 +9,7 @@ codex plugin add emberbsd-user@emberbsd-user-skills
 ```
 
 The catalog is `emberbsd-user-skills`.
-The package is `emberbsd-user`, version `0.3.0`.
+The package is `emberbsd-user`, version `0.3.1`.
 Start a new conversation after installation.
 Select the task skill directly when you know the task.
 
@@ -73,7 +73,7 @@ ruby scripts/check-package.rb --codex
 The check uses a temporary profile and a local catalog override.
 It verifies the plugin identifier and version.
 A separate temporary app-server profile checks resolved `composerIcon`, `logo`, `iconSmall`, and `iconLarge` paths.
-Package **0.3.0** passed with **Codex CLI 0.159.2** on **2026-10-11**.
+Package **0.3.1** passed with **Codex CLI 0.159.2** on **2026-10-11**.
 All ten skills passed native discovery and icon path resolution.
 The check does not install into a saved user profile.
 Desktop rendering, on-device execution, and agent behavior require separate evidence.

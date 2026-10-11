@@ -16,6 +16,8 @@ Record upstream and shared base revisions.
 Keep unrelated user edits and the last usable version.
 Make a focused personal patch through the owning recipe's mechanism.
 Use the supported build path and target sysroot with verified origin.
+Use the current shared compiler and dependency versions.
+Never install older compilers or libraries to satisfy dependency builds.
 
 Test the customization on the selected target.
 Check ordinary behavior and a relevant failure case.

@@ -4,7 +4,7 @@ Instructions for AI agents that assist [EmberBSD](https://github.com/oxtech-embe
 Use real CLI/API tools to complete the requested task.
 Keep personal software changes in the user's selected Ports repository.
 
-Version **0.3.0** provides ten small skills.
+Version **0.3.1** provides ten small skills.
 Each task skill has a narrow trigger, short instructions, and its own required references.
 The two legacy entry points now select a task skill.
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/home).
@@ -64,7 +64,6 @@ Use your client's documented installation mechanism.
 Retain the repository's [MIT license](LICENSE).
 Manual reading does not register automatic discovery.
 Keep your project's existing instructions.
-Root `AGENTS.md` governs this repository's contributors.
 
 See the [Codex adapter](docs/codex.md) for that client.
 ZCode and Claude Code use `.claude-plugin/marketplace.json`.
@@ -105,7 +104,7 @@ ruby scripts/check-package.rb
 ```
 
 Add `--codex` for isolated native discovery and icon path checks.
-Version **0.3.0** passed those native checks with Codex CLI **0.159.2** on **2026-10-11**.
+Version **0.3.1** passed those native checks with Codex CLI **0.159.2** on **2026-10-11**.
 See [packaging and acceptance](docs/packaging.md) for version-specific evidence and task scenarios.
 Package checks do not execute device workflows or establish agent behavior.
 Desktop icon rendering and on-device acceptance require separate checks.

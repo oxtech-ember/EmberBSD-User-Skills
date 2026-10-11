@@ -4,12 +4,12 @@ The package uses the portable Agent Plugins and Agent Skills layout.
 Root `plugin.json` is canonical.
 The Codex and `.claude-plugin` files are client adapters.
 They do not define an EmberBSD runtime or package manager.
-Version **0.3.0** contains two task selectors and eight task skills.
+Version **0.3.1** contains two task selectors and eight task skills.
 
 Install each selected skill folder in full.
 Keep its `SKILL.md`, references, `agents/openai.yaml`, and bundled icon together.
 Retain the MIT license.
-Do not copy root `AGENTS.md` into a user's application repository.
+Preserve the user's application instructions.
 References must resolve within their installed skill folder.
 Refer to another skill by name.
 Use its public source link when it is unavailable.
@@ -66,7 +66,7 @@ It does not establish agent compliance or device acceptance.
 Record the selected source revisions with the review results.
 
 The local review passed on **2026-10-11** for all ten routes.
-The package consistency check passed for **0.3.0** with ten skills.
+The package consistency check passed for **0.3.1** with ten skills.
 Native discovery and plugin/skill icon paths passed with **Codex CLI 0.159.2** on **2026-10-11**.
 All ten folders passed isolated reference, writing-limit, metadata, and icon checks.
 The review used these source revisions:
