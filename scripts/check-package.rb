@@ -6,6 +6,7 @@ require 'yaml'
 require 'open3'
 require 'tmpdir'
 require 'timeout'
+require_relative 'skill-writing'
 
 ROOT = File.expand_path('..', __dir__)
 
@@ -72,6 +73,24 @@ def codex_plugin_detail(profile_dir, plugin_name)
   end
 end
 
+def codex_plugin_list(profile_dir, catalog_name, config)
+  Open3.popen3({ 'CODEX_HOME' => profile_dir }, 'codex', 'plugin', 'list',
+              '--marketplace', catalog_name, '--available', '--json', '-c', config,
+              chdir: ROOT) do |input, output, errors, process|
+    input.close
+    readers = [output, errors].map { |stream| Thread.new { stream.read } }
+    begin
+      Timeout.timeout(20) { [readers[0].value, readers[1].value, process.value] }
+    ensure
+      unless process.join(5)
+        Process.kill('TERM', process.pid)
+        Process.kill('KILL', process.pid) unless process.join(5)
+      end
+      readers.each(&:kill)
+    end
+  end
+end
+
 check(ARGV.empty? || ARGV == ['--codex'], 'usage: ruby scripts/check-package.rb [--codex]')
 
 begin
@@ -111,8 +130,14 @@ begin
         File.file?(File.join(ROOT, 'assets/emberbsd-logo.png')),
         'client catalog icon must point at the bundled asset')
 
-  skills = Dir.glob(File.join(ROOT, 'skills', '*', 'SKILL.md'))
-  check(!skills.empty?, 'no skills found')
+  skill_directories = Dir.glob(File.join(ROOT, 'skills', '*')).select { |path| File.directory?(path) }.sort
+  check(!skill_directories.empty?, 'no skills found')
+  skills = skill_directories.map do |directory|
+    path = File.join(directory, 'SKILL.md')
+    check(File.file?(path), "missing skill entry point: #{directory}")
+    path
+  end
+  writing_errors = []
   skills.each do |path|
     check(inside_package?(path), "skill escapes package: #{path}")
     content = File.read(path)
@@ -125,21 +150,19 @@ begin
     description = metadata['description']
     check(description.is_a?(String) && (1..1024).cover?(description.strip.length),
           "missing or oversized description: #{name}")
-    content.scan(/\]\(([^)]+)\)/).flatten.each do |reference|
-      next if reference.match?(/\A(?:https?:|#)/)
-      target = File.expand_path(reference.split('#', 2).first, File.dirname(path))
-      check(inside_package?(target), "missing or external bundled reference: #{reference}")
-    end
+    writing_errors.concat(SkillWriting.errors(File.dirname(path), description))
     presentation = File.join(File.dirname(path), 'agents/openai.yaml')
     check(File.file?(presentation), "missing Codex skill presentation: #{name}")
 
-    check(inside_package?(presentation), "presentation escapes package: #{name}")
+    check(File.realpath(presentation).start_with?(File.realpath(File.dirname(path)) + '/'),
+          "presentation escapes skill: #{name}")
     interface = YAML.safe_load(File.read(presentation)).fetch('interface')
     check(interface['display_name'].is_a?(String), "missing display name: #{name}")
     check((25..64).cover?(interface.fetch('short_description').length), "invalid short description: #{name}")
     check(interface.fetch('default_prompt').include?("$#{name}"), "default prompt must name skill: #{name}")
     %w[icon_small icon_large].each { |field| check_icon(interface, field, File.dirname(path)) }
   end
+  check(writing_errors.empty?, writing_errors.join("\n"))
 
   puts "PASS: #{manifest['name']} #{manifest['version']}; #{skills.length} skill(s); local consistency"
   if ARGV == ['--codex']
@@ -147,9 +170,7 @@ begin
     # An installed older release can hide the candidate from the available list.
     # Keep discovery independent of the user's installed plugins and settings.
     output, errors, status = Dir.mktmpdir('ember-skills-codex-') do |profile_dir|
-      Open3.capture3({ 'CODEX_HOME' => profile_dir }, 'codex', 'plugin', 'list',
-                    '--marketplace', catalog['name'], '--available', '--json',
-                    '-c', config, chdir: ROOT)
+      codex_plugin_list(profile_dir, catalog['name'], config)
     end
     check(status.success?, "Codex discovery failed: #{errors}")
     result = JSON.parse(output)

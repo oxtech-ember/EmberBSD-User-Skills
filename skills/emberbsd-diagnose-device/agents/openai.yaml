@@ -1,0 +1,6 @@
+interface:
+  display_name: "EmberBSD Device Diagnosis"
+  short_description: "Diagnose and repair an EmberBSD fault"
+  icon_small: "./assets/emberbsd-logo.png"
+  icon_large: "./assets/emberbsd-logo.png"
+  default_prompt: "Use $emberbsd-diagnose-device to find the cause of my device fault and verify the repair."

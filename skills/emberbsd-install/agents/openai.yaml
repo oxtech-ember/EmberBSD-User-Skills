@@ -1,6 +1,6 @@
 interface:
   display_name: "EmberBSD Install"
-  short_description: "Install EmberBSD on boards, VMs and phones"
+  short_description: "Select a skill for an EmberBSD installation"
   icon_small: "./assets/emberbsd-logo.png"
   icon_large: "./assets/emberbsd-logo.png"
-  default_prompt: "Use $emberbsd-install to install EmberBSD on my device, verify the write and confirm the first boot."
+  default_prompt: "Use $emberbsd-install to select the installation skill for my EmberBSD target."

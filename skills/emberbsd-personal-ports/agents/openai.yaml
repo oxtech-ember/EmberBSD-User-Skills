@@ -1,0 +1,6 @@
+interface:
+  display_name: "EmberBSD Personal Ports"
+  short_description: "Maintain a personal application patch"
+  icon_small: "./assets/emberbsd-logo.png"
+  icon_large: "./assets/emberbsd-logo.png"
+  default_prompt: "Use $emberbsd-personal-ports to maintain my application patch and test the requested behavior."

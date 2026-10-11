@@ -1,115 +1,115 @@
 # EmberBSD User Skills
 
-Instructions for AI agents assisting [EmberBSD](https://github.com/oxtech-ember/EmberBSD)
-users: operate real CLI/API tools, diagnose devices, and maintain personal
-software changes through the user's Ports repository and GitHub.
+Instructions for AI agents that assist [EmberBSD](https://github.com/oxtech-ember/EmberBSD) users.
+Use real CLI/API tools to complete the requested task.
+Keep personal software changes in the user's selected Ports repository.
 
-Version **0.2.3** provides two skills:
-[`emberbsd-install`](skills/emberbsd-install/SKILL.md) for installation discovery
-and acceptance on boards, desktop virtual machines, and USB-cabled phones, and
-[`emberbsd-user-guide`](skills/emberbsd-user-guide/SKILL.md) with
-focused references for applications, diagnostics, personal Ports, and GitHub.
-Install methods stay device-general; board-specific procedures live in the
-[OS repository](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards).
-It uses the portable [Agent Plugins](https://agent-plugins.org/) and
-[Agent Skills](https://agentskills.io/home) formats.
+Version **0.3.0** provides ten small skills.
+Each task skill has a narrow trigger, short instructions, and its own required references.
+The two legacy entry points now select a task skill.
+The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/home).
 
-## Two packages, two purposes
+## Select a task skill
 
-| Package | Use it for |
+| Skill | Use it when |
 | --- | --- |
-| **EmberBSD-User-Skills** (`emberbsd-user`) | Operate your device, configure applications, change an existing program for your needs, maintain and publish patches in your personal Ports |
-| [**Ember-Agent-Skills**](https://github.com/oxtech-ember/Ember-Agent-Skills) (`emberbsd-development`) | Develop applications, change EmberBSD itself, bring up boards, maintain shared ports, and contribute tested fixes |
+| [`emberbsd-user-guide`](skills/emberbsd-user-guide/SKILL.md) | An EmberBSD user task needs skill selection |
+| [`emberbsd-manage-app`](skills/emberbsd-manage-app/SKILL.md) | You need to install, configure, update, or remove an application |
+| [`emberbsd-diagnose-device`](skills/emberbsd-diagnose-device/SKILL.md) | A device or application has a fault |
+| [`emberbsd-capture-network`](skills/emberbsd-capture-network/SKILL.md) | You need packet/HCI evidence or network measurements |
+| [`emberbsd-personal-ports`](skills/emberbsd-personal-ports/SKILL.md) | You need a personal application patch across upstream updates |
+| [`emberbsd-github`](skills/emberbsd-github/SKILL.md) | You need to create, synchronize, or publish the selected repository |
+| [`emberbsd-install`](skills/emberbsd-install/SKILL.md) | An installation task needs target selection |
+| [`emberbsd-install-board`](skills/emberbsd-install-board/SKILL.md) | You need EmberBSD on a board's card or onboard storage |
+| [`emberbsd-install-vm`](skills/emberbsd-install-vm/SKILL.md) | You need an aarch64 guest on a desktop VM host |
+| [`emberbsd-install-phone`](skills/emberbsd-install-phone/SKILL.md) | You need installation support inspection for a USB-connected phone or tablet |
 
-Editing source and compiling a personal modification remain a user workflow.
-They do not require a contribution to EmberBSD or the original upstream.
-A reusable fix can enter the developer workflow when you request that contribution.
-Both packages can coexist; select by the requested outcome.
+Load only the skills needed for the requested result.
+Each folder works alone with its bundled references, Codex metadata, and icon.
+Skills refer to other skills by name.
+Public source links provide instructions when another skill is unavailable.
+Legacy reference paths remain as short links to their new owners.
 
-These skills can guide an assistant running on the device or working remotely.
-They discover the available tools and follow their documented interfaces.
-This release contains instructions and packaging checks. It does not supply
-an on-device agent, package manager, GitHub client, credentials, MCP server,
-or implemented SDK/Runtime interfaces.
-The current OS tree has no executable phone installer or YS-M33 stage documents;
-the phone reference permits authorized inspection and identifies that blocker.
-The OS-owned development VM image has its own declared input provenance;
-a general validated installation image remains separate.
+## Keep the requested scope
 
-## Start with a user task
+| Package | Intended tasks |
+| --- | --- |
+| **EmberBSD-User-Skills** (`emberbsd-user`) | Device operation, application configuration, personal patches, personal Ports publication, and supported installation |
+| [**Ember-Agent-Skills**](https://github.com/oxtech-ember/Ember-Agent-Skills) (`emberbsd-development`) | Application development, OS changes, board development, shared ports, and requested contributions |
 
-After loading the skill, ask your assistant, for example:
+Personal third-party patches and their builds remain user tasks.
+A personal patch does not require an upstream PR.
+Select the package by the requested result when both packages are installed.
+Reuse authorization for the exact action, target, and data loss.
+Keep credentials, private traces, and backups out of public reports.
 
-> Use emberbsd-user-guide to change this application's default behavior,
-> keep the patch in my personal Ports repository, and verify that it still
-> works with the current upstream release. Publish to the repository I selected.
+For example, ask your assistant:
 
-The workflow keeps upstream sources, shared EmberBSD portability fixes and
-personal changes distinct. When an update breaks a patch or a test, the agent
-investigates and repairs it within the requested scope, then tests again.
-Success means the requested behavior works on the target. A completed build
-alone is not enough.
+> Use emberbsd-personal-ports to change this application's default behavior in my personal Ports repository.
+> Test the change with the current upstream release.
+> Use emberbsd-github to publish it to the repository I selected.
 
-Other tasks include installing an application, configuring a service, and
-collecting evidence for a device fault. Installation of the OS itself is a
-separate skill with its own references:
+A completed build does not establish the requested behavior.
+The assistant must investigate failures and rerun the affected checks.
+Target execution remains untested when the selected device is unavailable.
 
-- [Boards: cards and onboard storage](skills/emberbsd-install/references/boards.md)
-- [Desktop VM](skills/emberbsd-install/references/desktop-vm.md)
-- [Cable installation of phones](skills/emberbsd-install/references/phone-cable.md)
+## Install the package or a skill
 
-Instructions are loaded as needed:
+Use your client's documented installation mechanism.
 
-- [Tools and targets](skills/emberbsd-user-guide/references/tools-and-targets.md)
-- [Applications](skills/emberbsd-user-guide/references/applications.md)
-- [Device diagnostics](skills/emberbsd-user-guide/references/device-diagnostics.md)
-- [Personal Ports](skills/emberbsd-user-guide/references/personal-ports.md)
-- [GitHub workflows](skills/emberbsd-user-guide/references/github.md)
+1. For Agent Plugins, load the repository root and select `emberbsd-user`.
+2. For Agent Skills, load each selected `skills/<name>/` folder in full.
+3. For manual use, read the selected `SKILL.md` and its required references.
 
-## Load the package
+Retain the repository's [MIT license](LICENSE).
+Manual reading does not register automatic discovery.
+Keep your project's existing instructions.
+Root `AGENTS.md` governs this repository's contributors.
 
-Use your client's documented installation mechanism:
+See the [Codex adapter](docs/codex.md) for that client.
+ZCode and Claude Code use `.claude-plugin/marketplace.json`.
+In ZCode, add `oxtech-ember/EmberBSD-User-Skills` through **Settings → Plugin Management → Discover → `+`**.
+Install `emberbsd-user` from that catalog.
+In Claude Code, use these commands:
 
-1. For Agent Plugins with skills support, load the repository root and select
-   `emberbsd-user`.
-2. For Agent Skills support, load the complete `skills/emberbsd-user-guide/`
-   and `skills/emberbsd-install/` directories, including their references and
-   the repository's MIT license.
-3. For manual use, ask the assistant to read `SKILL.md` and the relevant linked
-   references. This does not register automatic discovery.
+```text
+/plugin marketplace add oxtech-ember/EmberBSD-User-Skills
+/plugin install emberbsd-user@emberbsd-user-skills
+```
 
-See the [Codex adapter](docs/codex.md) for one concrete client. ZCode and
-Claude Code discover the bundled `.claude-plugin/marketplace.json` catalog:
-in ZCode add the GitHub repository `oxtech-ember/EmberBSD-User-Skills` through
-**Settings → Plugin Management → Discover → `+`** and install `emberbsd-user`;
-in Claude Code use `/plugin marketplace add oxtech-ember/EmberBSD-User-Skills`
-and `/plugin install emberbsd-user@emberbsd-user-skills`. The portable
-format does not prescribe a universal installation command or require Codex.
-Keep your project's instructions. Root `AGENTS.md` governs contributions to
-this repository; it is not a replacement for device or application policies.
+The portable format does not prescribe a universal installation command.
 
-## Ownership and validation
+## Tools and current limits
 
-[EmberBSD-Ports](https://github.com/oxtech-ember/EmberBSD-Ports) owns shared
-third-party recipes and compatibility patches. Your personal Ports owns your
-chosen behavior changes. [SDK](https://github.com/oxtech-ember/EmberBSD-SDK)
-and [Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) own their
-application contracts and device operations when implemented. Skills explain
-how to use real tools; they do not create substitute APIs.
+Skills contain instructions and packaging checks.
+They do not supply a package manager, device agent, GitHub client, credentials, or MCP server.
+[SDK](https://github.com/oxtech-ember/EmberBSD-SDK) and [Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) currently provide design boundaries without released CLI/API interfaces.
+The assistant must recheck current sources before using future interfaces.
+[Ports](https://github.com/oxtech-ember/EmberBSD-Ports) owns shared recipes and compatibility patches.
+Your personal Ports owns your chosen behavior changes.
 
-Package consistency passes for **0.2.3**; the `.claude-plugin` catalog and
-plugin manifest were verified against the marketplace and plugin manifest
-locations and name rules that the ZCode and Claude Code loaders probe.
-Native Codex discovery and plugin/skill icon path resolution passed for **0.2.3**
-with **Codex CLI 0.159.2** on **2026-10-11**. These checks neither install
-into saved user settings nor execute the workflows. On-device operation,
-agent behavior and end-to-end personal Ports maintenance have not been
-validated by these checks. Desktop icon rendering and other clients remain
-untested for this release.
+The current OS tree has a YS-M33/A133 DTS.
+It has no executable phone installer or model-specific stage documents.
+The phone skill permits authorized read-only inspection and reports that gap.
+The OS development VM image declares its own input provenance.
+It remains separate from a general installation release.
+Board-specific procedures belong to the [OS board catalog](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards).
 
-Run `ruby scripts/check-package.rb` for consistency, or add `--codex` for
-isolated native discovery and icon path checks. See [packaging and acceptance](docs/packaging.md)
-for the check boundaries and behavioral scenarios.
+## Validate the package
+
+Run the local consistency check:
+
+```sh
+ruby scripts/test-check-package.rb
+ruby scripts/check-package.rb
+```
+
+Add `--codex` for isolated native discovery and icon path checks.
+Version **0.3.0** passed those native checks with Codex CLI **0.159.2** on **2026-10-11**.
+See [packaging and acceptance](docs/packaging.md) for version-specific evidence and task scenarios.
+Package checks do not execute device workflows or establish agent behavior.
+Desktop icon rendering and on-device acceptance require separate checks.
+See [skill writing rules](docs/skill-writing.md) for the controlled English style.
 
 ## License
 

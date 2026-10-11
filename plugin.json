@@ -1,8 +1,8 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "emberbsd-user",
-  "version": "0.2.3",
-  "description": "Agent skills for EmberBSD users: OS installation onto boards, desktop VMs and USB-cabled phones, applications, device diagnostics, personal Ports and GitHub workflows.",
+  "version": "0.3.0",
+  "description": "Task-specific agent skills for EmberBSD applications, device diagnosis, network capture, personal Ports, GitHub, and supported OS installation.",
   "author": {
     "name": "neonix20b",
     "url": "https://github.com/neonix20b"
@@ -24,7 +24,7 @@
       "interface": {
         "displayName": "EmberBSD User Skills",
         "shortDescription": "Use EmberBSD devices and maintain your personal Ports.",
-        "longDescription": "Install EmberBSD onto supported boards, virtual machines and USB-cabled phones; then operate your device, configure applications, maintain personal source changes across upstream updates, and publish checked patches to the selected personal repository using available tools.",
+        "longDescription": "Select a focused skill for EmberBSD applications, device diagnosis, private network evidence, personal patches, GitHub, or supported installation. Use existing documented tools and verify the requested result.",
         "developerName": "neonix20b",
         "category": "Developer Tools",
         "websiteURL": "https://github.com/oxtech-ember/EmberBSD-User-Skills",

@@ -1,0 +1,6 @@
+interface:
+  display_name: "EmberBSD GitHub"
+  short_description: "Manage the selected GitHub repository"
+  icon_small: "./assets/emberbsd-logo.png"
+  icon_large: "./assets/emberbsd-logo.png"
+  default_prompt: "Use $emberbsd-github to publish checked files to my selected repository within the authorized scope."

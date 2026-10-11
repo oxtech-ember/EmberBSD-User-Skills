@@ -1,0 +1,6 @@
+interface:
+  display_name: "EmberBSD VM Installation"
+  short_description: "Install an EmberBSD aarch64 desktop VM"
+  icon_small: "./assets/emberbsd-logo.png"
+  icon_large: "./assets/emberbsd-logo.png"
+  default_prompt: "Use $emberbsd-install-vm to install my selected EmberBSD VM image and verify sign-in and reboot."
