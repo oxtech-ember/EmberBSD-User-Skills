@@ -26,6 +26,17 @@ adb -s "$SERIAL" shell cat /proc/swaps
 adb -s "$SERIAL" shell ls -l /dev/block
 ```
 
+For Apple devices, use the same read-only limit in DFU or recovery mode.
+
+```sh
+system_profiler SPUSBDataType | grep -i -B2 -A8 dfu
+irecovery -q
+```
+
+`irecovery` reports the mode, CPID, CID, BDID, ECID, and nonce.
+Map CPID to the SoC before any port decision.
+The `su` rules above do not apply to Apple DFU inspection.
+
 Set `MODEL` from verified device or user facts.
 Search model instructions only with a nonempty identity.
 
@@ -36,8 +47,9 @@ test -n "$MODEL" && git -C "$OS_SRC" grep -n -i -F -e "$MODEL" -- ember README.m
 Inspection excludes writes, reboots, and transfers.
 Missing properties or failed `su` are evidence gaps.
 Do not assume `adb root` on production Android.
-Current sources contain a YS-M33/A133 DTS without executable phone tooling or `ys-m33-a133-*` stage documents.
-Stop dependent stages until the model's procedure exists.
+When the model has no stage documents, stop the installation stages.
+Start the [first port track](first-port.md) instead.
+Recheck current sources on later tasks.
 
 When model-specific tooling exists, require this evidence before advancing.
 

@@ -4,7 +4,7 @@ Instructions for AI agents that assist [EmberBSD](https://github.com/oxtech-embe
 Use real CLI/API tools to complete the requested task.
 Keep personal software changes in the user's selected Ports repository.
 
-Version **0.3.1** provides ten small skills.
+Version **0.4.0** provides ten small skills.
 Each task skill has a narrow trigger, short instructions, and its own required references.
 The two legacy entry points now select a task skill.
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/home).
@@ -22,7 +22,7 @@ The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](
 | [`emberbsd-install`](skills/emberbsd-install/SKILL.md) | An installation task needs target selection |
 | [`emberbsd-install-board`](skills/emberbsd-install-board/SKILL.md) | You need EmberBSD on a board's card or onboard storage |
 | [`emberbsd-install-vm`](skills/emberbsd-install-vm/SKILL.md) | You need an aarch64 guest on a desktop VM host |
-| [`emberbsd-install-phone`](skills/emberbsd-install-phone/SKILL.md) | You need installation support inspection for a USB-connected phone or tablet |
+| [`emberbsd-install-phone`](skills/emberbsd-install-phone/SKILL.md) | You need installation inspection or a first port track for a USB-connected phone or tablet |
 
 Load only the skills needed for the requested result.
 Each folder works alone with its bundled references, Codex metadata, and icon.
@@ -87,9 +87,9 @@ The assistant must recheck current sources before using future interfaces.
 [Ports](https://github.com/oxtech-ember/EmberBSD-Ports) owns shared recipes and compatibility patches.
 Your personal Ports owns your chosen behavior changes.
 
-The current OS tree has a YS-M33/A133 DTS.
-It has no executable phone installer or model-specific stage documents.
-The phone skill permits authorized read-only inspection and reports that gap.
+A phone model without an OS installer is a first port, not a refusal.
+The phone skill runs read-only identity inspection and its first port track.
+The track collects identity, boot chain, and prior art, then proposes the bring-up plan.
 The OS development VM image declares its own input provenance.
 It remains separate from a general installation release.
 Board-specific procedures belong to the [OS board catalog](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards).
@@ -105,6 +105,7 @@ ruby scripts/check-package.rb
 
 Add `--codex` for isolated native discovery and icon path checks.
 Version **0.3.1** passed those native checks with Codex CLI **0.159.2** on **2026-10-11**.
+Version **0.4.0** passed the local consistency checks on **2026-10-11**.
 See [packaging and acceptance](docs/packaging.md) for version-specific evidence and task scenarios.
 Package checks do not execute device workflows or establish agent behavior.
 Desktop icon rendering and on-device acceptance require separate checks.

@@ -1,9 +1,9 @@
 ---
 name: emberbsd-install-phone
-description: "Use when inspecting installation support or installing EmberBSD on a USB-connected phone or tablet."
+description: "Use when inspecting installation support, installing, or starting a first port on a USB-connected phone or tablet."
 ---
 
-# Inspect or install a USB-connected phone
+# Inspect, install, or start porting a USB-connected phone
 
 Identify the selected device serial and exact model.
 If the model is unknown, perform authorized read-only identity discovery first.
@@ -12,11 +12,12 @@ Inspect current OS sources for the exact model's installer and stage documents.
 Inspection excludes writes, reboots, and transfers.
 A missing property or failed `su` does not authorize unlocking.
 
-The current OS sources contain a YS-M33/A133 DTS.
-They provide no executable phone installer or `ys-m33-a133-*` stage documents.
-Report that gap before any dependent stage.
-A DTS does not establish protected-chain access or EmberBSD first boot.
-Recheck current sources on later tasks.
+When the model has no executable installer, do not stop at the gap report.
+Read the [first port track](references/first-port.md).
+Collect the model's identity, boot chain, and prior art.
+Deliver a bring-up plan with evidence checkpoints and named unrun checks.
+A DTS alone does not establish protected-chain access or EmberBSD first boot.
+Use `emberbsd-add-board` in Ember-Agent-Skills for OS source changes.
 
 When model-specific tooling exists, follow its documented stage order.
 Reuse authorization for the exact action, device, and data loss.

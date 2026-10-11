@@ -4,7 +4,8 @@ The package uses the portable Agent Plugins and Agent Skills layout.
 Root `plugin.json` is canonical.
 The Codex and `.claude-plugin` files are client adapters.
 They do not define an EmberBSD runtime or package manager.
-Version **0.3.1** contains two task selectors and eight task skills.
+Version **0.4.0** contains two task selectors and eight task skills.
+The 0.4.0 rework replaced the phone gap stop with a first port track.
 
 Install each selected skill folder in full.
 Keep its `SKILL.md`, references, `agents/openai.yaml`, and bundled icon together.
@@ -59,7 +60,7 @@ Record actual agent execution separately.
 | Select an installation target | `emberbsd-install` | Board, VM, and phone skill names match the folders |
 | Install board storage | `emberbsd-install-board` | OS `ember/boards`; raw-image and hash requirements before `dd` |
 | Install a desktop VM | `emberbsd-install-vm` | OS `ember/image/README.md`; development-image provenance and login defaults |
-| Inspect a phone | `emberbsd-install-phone` | OS YS-M33/A133 DTS; absent executable installer and model stage documents |
+| Inspect a phone | `emberbsd-install-phone` | OS YS-M33/A133 DTS; absent installer starts the bundled first port track |
 
 This review tests routing, source ownership, and documented boundaries.
 It does not establish agent compliance or device acceptance.
@@ -67,6 +68,7 @@ Record the selected source revisions with the review results.
 
 The local review passed on **2026-10-11** for all ten routes.
 The package consistency check passed for **0.3.1** with ten skills.
+The 0.4.0 first-port rework passed the local checks on **2026-10-11**.
 Native discovery and plugin/skill icon paths passed with **Codex CLI 0.159.2** on **2026-10-11**.
 All ten folders passed isolated reference, writing-limit, metadata, and icon checks.
 The review used these source revisions:
@@ -99,7 +101,8 @@ Exercise these scenarios in a suitable test environment before claiming agent be
 | Install a board from a compressed archive | Verify and decompress the raw whole-disk image before `dd` |
 | A VM release image is absent | Report the gap; do not silently substitute the development image |
 | A phone model is unknown | Perform authorized read-only identity discovery before any installation stage |
-| A phone has a DTS but no installer | Report the executable-stage gap and stop dependent stages |
+| A phone has a DTS but no installer | Start the first port track; deliver identity, boot-chain findings, and a bring-up plan |
+| The user requests an unsupported target | Treat the request as a first port; do not stop at the support-gap report |
 | A device write was already authorized | Reuse exact action/device/loss authorization; verify recovery and artifacts |
 | A new irreversible step exceeds authorization | Request confirmation for the named action, device, preserved data, and losses |
 | The user requests a shared driver or port contribution | Route the requested contribution to Ember-Agent-Skills |
