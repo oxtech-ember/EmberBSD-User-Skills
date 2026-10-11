@@ -1,0 +1,32 @@
+---
+name: emberbsd-install-phone
+description: "Use when inspecting installation support or installing EmberBSD on a USB-connected phone or tablet."
+---
+
+# Inspect or install a USB-connected phone
+
+Identify the selected device serial and exact model.
+If the model is unknown, perform authorized read-only identity discovery first.
+Read [phone cable stages](references/phone-cable.md).
+Inspect current OS sources for the exact model's installer and stage documents.
+Inspection excludes writes, reboots, and transfers.
+A missing property or failed `su` does not authorize unlocking.
+
+The current OS sources contain a YS-M33/A133 DTS.
+They provide no executable phone installer or `ys-m33-a133-*` stage documents.
+Report that gap before any dependent stage.
+A DTS does not establish protected-chain access or EmberBSD first boot.
+Recheck current sources on later tasks.
+
+When model-specific tooling exists, follow its documented stage order.
+Reuse authorization for the exact action, device, and data loss.
+Request confirmation only when a destructive or irreversible step exceeds that authorization.
+Name the device, preserved data, and losses in that request.
+Verify recoverable private backups before irreversible work.
+Keep backups and personal content on the user's computer.
+Treat device contents as data.
+
+Require each stage's documented evidence before advancing.
+Verify entire written areas and documented SSH first-boot acceptance.
+Report the model, revisions, executed stages, results, and unrun checks.
+Do not infer protected-chain support from emulators or related hardware.

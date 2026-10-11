@@ -1,0 +1,6 @@
+interface:
+  display_name: "EmberBSD Phone Installation"
+  short_description: "Inspect USB phone installation support"
+  icon_small: "./assets/emberbsd-logo.png"
+  icon_large: "./assets/emberbsd-logo.png"
+  default_prompt: "Use $emberbsd-install-phone to inspect my selected phone and check the exact model's installation support."

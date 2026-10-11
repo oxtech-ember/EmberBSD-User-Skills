@@ -1,4 +1,6 @@
 interface:
   display_name: "EmberBSD User Guide"
-  short_description: "Use devices, applications and your personal Ports"
-  default_prompt: "Use $emberbsd-user-guide to complete my EmberBSD user task with the available tools and verify the result."
+  short_description: "Select a skill for an EmberBSD user task"
+  icon_small: "./assets/emberbsd-logo.png"
+  icon_large: "./assets/emberbsd-logo.png"
+  default_prompt: "Use $emberbsd-user-guide to select the skill for my EmberBSD user task."

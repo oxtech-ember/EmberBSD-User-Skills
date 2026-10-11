@@ -1,0 +1,6 @@
+interface:
+  display_name: "EmberBSD Application"
+  short_description: "Manage one EmberBSD application"
+  icon_small: "./assets/emberbsd-logo.png"
+  icon_large: "./assets/emberbsd-logo.png"
+  default_prompt: "Use $emberbsd-manage-app to complete my application change and test its behavior."

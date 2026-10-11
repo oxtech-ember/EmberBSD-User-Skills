@@ -5,6 +5,8 @@ require 'json'
 require 'yaml'
 require 'open3'
 require 'tmpdir'
+require 'timeout'
+require_relative 'skill-writing'
 
 ROOT = File.expand_path('..', __dir__)
 
@@ -18,6 +20,75 @@ end
 
 def inside_package?(path)
   File.exist?(path) && File.realpath(path).start_with?(File.realpath(ROOT) + '/')
+end
+
+def check_icon(interface, field, root)
+  path = interface[field]
+  check(path == './assets/emberbsd-logo.png', "#{field} must point at the bundled EmberBSD icon")
+  target = File.join(root, path)
+  check(File.file?(target) && File.realpath(target).start_with?(File.realpath(root) + '/assets/'),
+        "missing or external icon: #{target}")
+  check(File.binread(target) == File.binread(File.join(ROOT, 'assets/emberbsd-logo.png')),
+        "icon differs from the package's EmberBSD logo: #{target}")
+end
+
+def codex_response(input, output, id, method, params)
+  input.puts(JSON.generate(id: id, method: method, params: params))
+  loop do
+    response = JSON.parse(output.readline)
+    next unless response['id'] == id
+
+    raise "Codex #{method} failed: #{response['error']}" if response['error']
+
+    return response.fetch('result')
+  end
+end
+
+def codex_plugin_detail(profile_dir, plugin_name)
+  Open3.popen3({ 'CODEX_HOME' => profile_dir, 'RUST_LOG' => 'warn' }, 'codex', 'app-server',
+              '--stdio', '-c', 'features.plugins=true', '-c', 'features.remote_plugin=false',
+              chdir: ROOT) do |input, output, errors, process|
+    errors_reader = Thread.new { errors.read }
+    begin
+      Timeout.timeout(20) do
+        codex_response(input, output, 1, 'initialize', {
+          clientInfo: { name: 'ember-package-check', version: '1' },
+          capabilities: { experimentalApi: true }
+        })
+        input.puts(JSON.generate(method: 'initialized', params: {}))
+        codex_response(input, output, 2, 'plugin/read', {
+          marketplacePath: File.join(ROOT, '.agents/plugins/marketplace.json'),
+          pluginName: plugin_name
+        }).fetch('plugin')
+      end
+    ensure
+      input.close
+      unless process.join(5)
+        Process.kill('TERM', process.pid)
+        Process.kill('KILL', process.pid) unless process.join(5)
+      end
+      process.value
+      errors_reader.value
+    end
+  end
+end
+
+def codex_plugin_list(profile_dir, catalog_name, config)
+  Open3.popen3({ 'CODEX_HOME' => profile_dir }, 'codex', 'plugin', 'list',
+              '--marketplace', catalog_name, '--available', '--json', '-c', config,
+              chdir: ROOT) do |input, output, errors, process|
+    input.close
+    readers = [output, errors].map { |stream| Thread.new { stream.read } }
+    begin
+      Timeout.timeout(20) { [readers[0].value, readers[1].value, process.value] }
+    ensure
+      unless process.join(5)
+        Process.kill('TERM', process.pid)
+        Process.kill('KILL', process.pid) unless process.join(5)
+      end
+      readers.each(&:kill)
+    end
+  end
 end
 
 check(ARGV.empty? || ARGV == ['--codex'], 'usage: ruby scripts/check-package.rb [--codex]')
@@ -40,6 +111,8 @@ begin
         'review marketplace installation and authentication policies')
   check(entry['category'] == manifest.dig('extensions', 'com.openai', 'interface', 'category'),
         'marketplace and plugin categories disagree')
+  plugin_interface = manifest.fetch('extensions').fetch('com.openai').fetch('interface')
+  %w[composerIcon logo].each { |field| check_icon(plugin_interface, field, ROOT) }
 
   client_manifest = read_json(File.join(ROOT, '.claude-plugin/plugin.json'))
   client_catalog = read_json(File.join(ROOT, '.claude-plugin/marketplace.json'))
@@ -57,8 +130,14 @@ begin
         File.file?(File.join(ROOT, 'assets/emberbsd-logo.png')),
         'client catalog icon must point at the bundled asset')
 
-  skills = Dir.glob(File.join(ROOT, 'skills', '*', 'SKILL.md'))
-  check(!skills.empty?, 'no skills found')
+  skill_directories = Dir.glob(File.join(ROOT, 'skills', '*')).select { |path| File.directory?(path) }.sort
+  check(!skill_directories.empty?, 'no skills found')
+  skills = skill_directories.map do |directory|
+    path = File.join(directory, 'SKILL.md')
+    check(File.file?(path), "missing skill entry point: #{directory}")
+    path
+  end
+  writing_errors = []
   skills.each do |path|
     check(inside_package?(path), "skill escapes package: #{path}")
     content = File.read(path)
@@ -71,20 +150,19 @@ begin
     description = metadata['description']
     check(description.is_a?(String) && (1..1024).cover?(description.strip.length),
           "missing or oversized description: #{name}")
-    content.scan(/\]\(([^)]+)\)/).flatten.each do |reference|
-      next if reference.match?(/\A(?:https?:|#)/)
-      target = File.expand_path(reference.split('#', 2).first, File.dirname(path))
-      check(inside_package?(target), "missing or external bundled reference: #{reference}")
-    end
+    writing_errors.concat(SkillWriting.errors(File.dirname(path), description))
     presentation = File.join(File.dirname(path), 'agents/openai.yaml')
-    next unless File.file?(presentation)
+    check(File.file?(presentation), "missing Codex skill presentation: #{name}")
 
-    check(inside_package?(presentation), "presentation escapes package: #{name}")
+    check(File.realpath(presentation).start_with?(File.realpath(File.dirname(path)) + '/'),
+          "presentation escapes skill: #{name}")
     interface = YAML.safe_load(File.read(presentation)).fetch('interface')
     check(interface['display_name'].is_a?(String), "missing display name: #{name}")
     check((25..64).cover?(interface.fetch('short_description').length), "invalid short description: #{name}")
     check(interface.fetch('default_prompt').include?("$#{name}"), "default prompt must name skill: #{name}")
+    %w[icon_small icon_large].each { |field| check_icon(interface, field, File.dirname(path)) }
   end
+  check(writing_errors.empty?, writing_errors.join("\n"))
 
   puts "PASS: #{manifest['name']} #{manifest['version']}; #{skills.length} skill(s); local consistency"
   if ARGV == ['--codex']
@@ -92,9 +170,7 @@ begin
     # An installed older release can hide the candidate from the available list.
     # Keep discovery independent of the user's installed plugins and settings.
     output, errors, status = Dir.mktmpdir('ember-skills-codex-') do |profile_dir|
-      Open3.capture3({ 'CODEX_HOME' => profile_dir }, 'codex', 'plugin', 'list',
-                    '--marketplace', catalog['name'], '--available', '--json',
-                    '-c', config, chdir: ROOT)
+      codex_plugin_list(profile_dir, catalog['name'], config)
     end
     check(status.success?, "Codex discovery failed: #{errors}")
     result = JSON.parse(output)
@@ -104,7 +180,25 @@ begin
     end
     check(discovered, "Codex did not discover #{plugin_id} at version #{manifest['version']}")
     puts "PASS: native Codex discovery of #{plugin_id} #{manifest['version']}"
+    detail = Dir.mktmpdir('ember-skills-codex-icons-') do |profile_dir|
+      codex_plugin_detail(profile_dir, manifest.fetch('name'))
+    end
+    %w[composerIcon logo].each do |field|
+      check(detail.fetch('summary').fetch('interface')[field] == File.join(ROOT, 'assets/emberbsd-logo.png'),
+            "Codex did not resolve plugin #{field}")
+    end
+    skills.each do |path|
+      name = File.basename(File.dirname(path))
+      native_skill = detail.fetch('skills').find { |skill| skill['name'] == "#{manifest['name']}:#{name}" }
+      check(native_skill, "Codex did not read skill: #{name}")
+      %w[iconSmall iconLarge].each do |field|
+        check(native_skill.fetch('interface')[field] == File.join(File.dirname(path), 'assets/emberbsd-logo.png'),
+              "Codex did not resolve #{name} #{field}")
+      end
+    end
+    puts "PASS: native Codex plugin and skill icon paths"
   end
-rescue JSON::ParserError, Psych::Exception, KeyError, TypeError, NoMethodError, SystemCallError => error
+rescue JSON::ParserError, Psych::Exception, KeyError, TypeError, NoMethodError, SystemCallError,
+       EOFError, Timeout::Error, RuntimeError => error
   abort "FAIL: #{error.message}"
 end

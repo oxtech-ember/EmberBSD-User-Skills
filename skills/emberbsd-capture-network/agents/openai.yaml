@@ -1,0 +1,6 @@
+interface:
+  display_name: "EmberBSD Network Capture"
+  short_description: "Capture packets or Bluetooth HCI evidence"
+  icon_small: "./assets/emberbsd-logo.png"
+  icon_large: "./assets/emberbsd-logo.png"
+  default_prompt: "Use $emberbsd-capture-network to collect private network evidence for my selected target and event."

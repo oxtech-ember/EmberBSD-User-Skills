@@ -5,15 +5,15 @@
     "url": "https://github.com/neonix20b"
   },
   "metadata": {
-    "description": "Agent skills for using EmberBSD: OS installation, applications, device diagnostics, personal Ports and GitHub workflows.",
-    "version": "0.2.3"
+    "description": "Task-specific skills for EmberBSD applications, diagnostics, network capture, personal Ports, GitHub, and OS installation.",
+    "version": "0.3.0"
   },
   "plugins": [
     {
       "name": "emberbsd-user",
       "source": "./",
-      "version": "0.2.3",
-      "description": "Install EmberBSD on boards, desktop VMs and USB-cabled phones, operate devices, configure applications, diagnose faults, and maintain personal Ports and GitHub workflows.",
+      "version": "0.3.0",
+      "description": "Task-specific EmberBSD user skills for applications, diagnosis, capture, personal patches, GitHub, and supported installation.",
       "category": "developer-tools",
       "icon": "https://raw.githubusercontent.com/oxtech-ember/EmberBSD-User-Skills/main/assets/emberbsd-logo.png"
     }
