@@ -9,7 +9,7 @@ codex plugin add emberbsd-user@emberbsd-user-skills
 ```
 
 The catalog is `emberbsd-user-skills`.
-The package is `emberbsd-user`, version `0.3.1`.
+The package is `emberbsd-user`, version `0.4.1`.
 Start a new conversation after installation.
 Select the task skill directly when you know the task.
 

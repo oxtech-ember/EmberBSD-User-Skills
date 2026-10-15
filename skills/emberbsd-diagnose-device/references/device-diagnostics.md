@@ -33,6 +33,10 @@ Record command exit status before a dependent action.
 
 Check the [exact board page](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards).
 A related SoC or VM result does not establish physical support.
+For hardware or boot faults, read [DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards).
+Its [reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md) and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json) identify the exact board, carrier, and selected loader records.
+Check their cited sources and applicability before reusing wiring or configuration details.
+Keep current support and executable checks with the OS or Ports implementation.
 Device tools belong to the OS `usr.bin/videoctl`, `sbin/drvctl`, or `usr.sbin/btconfig` sources.
 Application dependencies belong to the owning Ports recipe or application.
 

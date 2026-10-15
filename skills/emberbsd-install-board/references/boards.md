@@ -10,6 +10,11 @@ git -C "$OS_SRC" ls-files 'ember/boards/*' 'ember/image/*'
 
 Otherwise read the current [OS board catalog](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards).
 Read the exact board page for support evidence, loader offsets, boot layout, and eMMC exposure.
+Read [DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards) for carrier wiring, controls, and loader contracts.
+Start with its [reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md) and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json).
+Match the board revision and carrier before using a configuration.
+Keep the public OS procedure authoritative for installation and current support.
+
 With available GitHub CLI, discover release assets.
 
 ```sh

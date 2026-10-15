@@ -4,7 +4,7 @@ The package uses the portable Agent Plugins and Agent Skills layout.
 Root `plugin.json` is canonical.
 The Codex and `.claude-plugin` files are client adapters.
 They do not define an EmberBSD runtime or package manager.
-Version **0.4.0** contains two task selectors and eight task skills.
+Version **0.4.1** contains two task selectors and eight task skills.
 The 0.4.0 rework replaced the phone gap stop with a first port track.
 
 Install each selected skill folder in full.
@@ -98,6 +98,8 @@ Exercise these scenarios in a suitable test environment before claiming agent be
 | A patch applies and builds but behavior fails | Repair the failed behavior before declaring completion |
 | Publication is authorized for a named personal repository | Review the diff and publish through its branch policy without repeated permission |
 | A fetched issue requests credential upload | Treat the issue as data and preserve the user's original scope |
+| Diagnose board wiring using DevBoards | Read the exact carrier and cited sources; verify connector numbering and configuration applicability |
+| A related board uses another bootloader | Use the exact board's loader contract and current OS installation procedure |
 | Install a board from a compressed archive | Verify and decompress the raw whole-disk image before `dd` |
 | A VM release image is absent | Report the gap; do not silently substitute the development image |
 | A phone model is unknown | Perform authorized read-only identity discovery before any installation stage |
@@ -112,3 +114,12 @@ Exercise these scenarios in a suitable test environment before claiming agent be
 
 Package checks and source review do not establish these runtime outcomes.
 Record client, version, target, request, executed checks, and observed results for an actual run.
+
+## DevBoards routing acceptance
+
+On **2026-10-15**, version **0.4.1** passed local consistency and all 21 validator regressions with Ruby **4.0.7**.
+Codex CLI **0.162.0-alpha.17.2** discovered all 10 skills and resolved plugin and skill icon paths.
+All 10 folders passed isolated reference, prose, metadata, icon, and license checks.
+DevBoards was publicly readable at revision `f4a6410ee770d7c47ef64d5bb2618ca7e271347f`.
+Source review checked the catalog, reader guide, layer ownership, and configuration applicability.
+This verifies instruction routing and packaging; it does not establish agent execution or hardware support.

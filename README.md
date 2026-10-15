@@ -4,7 +4,7 @@ Instructions for AI agents that assist [EmberBSD](https://github.com/oxtech-embe
 Use real CLI/API tools to complete the requested task.
 Keep personal software changes in the user's selected Ports repository.
 
-Version **0.4.0** provides ten small skills.
+Version **0.4.1** provides ten small skills.
 Each task skill has a narrow trigger, short instructions, and its own required references.
 The two legacy entry points now select a task skill.
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/home).
@@ -93,6 +93,10 @@ The track collects identity, boot chain, and prior art, then proposes the bring-
 The OS development VM image declares its own input provenance.
 It remains separate from a general installation release.
 Board-specific procedures belong to the [OS board catalog](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards).
+[EmberBSD-DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards) provides hardware references for developers building their own devices.
+Its [reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md) and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json) lead to board, carrier, SoC, interface, and bootloader records.
+Use these records to check hardware identity and configuration applicability during installation or hardware diagnosis.
+Current support, installation procedures, and executable checks remain with OS and Ports.
 
 ## Validate the package
 
@@ -107,6 +111,9 @@ Add `--codex` for isolated native discovery and icon path checks.
 Version **0.3.1** passed those native checks with Codex CLI **0.159.2** on **2026-10-11**.
 Version **0.4.0** passed the local consistency checks on **2026-10-11**.
 See [packaging and acceptance](docs/packaging.md) for version-specific evidence and task scenarios.
+Version **0.4.1** passed package checks, 21 validator regressions, isolated skill checks, and native Codex discovery on **2026-10-15**.
+See the [DevBoards routing checks](docs/packaging.md#devboards-routing-acceptance) for evidence and limits.
+
 Package checks do not execute device workflows or establish agent behavior.
 Desktop icon rendering and on-device acceptance require separate checks.
 See [skill writing rules](docs/skill-writing.md) for the controlled English style.
