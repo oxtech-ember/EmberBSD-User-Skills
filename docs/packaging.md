@@ -123,3 +123,12 @@ All 10 folders passed isolated reference, prose, metadata, icon, and license che
 DevBoards was publicly readable at revision `f4a6410ee770d7c47ef64d5bb2618ca7e271347f`.
 Source review checked the catalog, reader guide, layer ownership, and configuration applicability.
 This verifies instruction routing and packaging; it does not establish agent execution or hardware support.
+
+## Kimi Code manifest packaging
+
+On **2026-10-16**, version **0.4.2** passed local consistency and all 22 validator regressions with Ruby **4.0.7**.
+The new `kimi.plugin.json` follows the documented Kimi Code plugin schema:
+required `name` and `version`, display `interface` fields, and `skills` at `./skills/`.
+The validator now rejects identity, version, description, license, skills-path, and interface
+disagreements between the Kimi manifest and the portable manifest.
+This verifies packaging only. Installation and skill loading in the Kimi Code client were not executed in this check.

@@ -4,7 +4,7 @@ Instructions for AI agents that assist [EmberBSD](https://github.com/oxtech-embe
 Use real CLI/API tools to complete the requested task.
 Keep personal software changes in the user's selected Ports repository.
 
-Version **0.4.1** provides ten small skills.
+Version **0.4.2** provides ten small skills.
 Each task skill has a narrow trigger, short instructions, and its own required references.
 The two legacy entry points now select a task skill.
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/home).
@@ -76,6 +76,15 @@ In Claude Code, use these commands:
 /plugin install emberbsd-user@emberbsd-user-skills
 ```
 
+Kimi Code reads `kimi.plugin.json` at the repository root.
+Install from the Plugins screen or run:
+
+```text
+/plugins install oxtech-ember/EmberBSD-User-Skills
+```
+
+Reinstall the plugin after a release; Kimi Code does not update it automatically.
+
 The portable format does not prescribe a universal installation command.
 
 ## Tools and current limits
@@ -113,6 +122,8 @@ Version **0.4.0** passed the local consistency checks on **2026-10-11**.
 See [packaging and acceptance](docs/packaging.md) for version-specific evidence and task scenarios.
 Version **0.4.1** passed package checks, 21 validator regressions, isolated skill checks, and native Codex discovery on **2026-10-15**.
 See the [DevBoards routing checks](docs/packaging.md#devboards-routing-acceptance) for evidence and limits.
+Version **0.4.2** added the Kimi Code manifest and passed package checks with 22 validator regressions on **2026-10-16**.
+See [Kimi Code manifest packaging](docs/packaging.md#kimi-code-manifest-packaging) for evidence and limits.
 
 Package checks do not execute device workflows or establish agent behavior.
 Desktop icon rendering and on-device acceptance require separate checks.

@@ -130,6 +130,20 @@ begin
         File.file?(File.join(ROOT, 'assets/emberbsd-logo.png')),
         'client catalog icon must point at the bundled asset')
 
+  kimi_manifest = read_json(File.join(ROOT, 'kimi.plugin.json'))
+  check(kimi_manifest['name'] == manifest['name'], 'kimi manifest identity disagrees')
+  check(kimi_manifest['version'] == manifest['version'], 'kimi manifest version disagrees')
+  check(kimi_manifest['name'].match?(/\A[a-z0-9][a-z0-9_-]{0,63}\z/), 'kimi manifest name is not a valid plugin id')
+  check(kimi_manifest['description'] == manifest['description'], 'kimi manifest description disagrees')
+  check(kimi_manifest['license'] == 'MIT', 'kimi manifest license disagrees')
+  check(kimi_manifest['skills'] == './skills/', 'kimi manifest must expose the bundled skills directory')
+  kimi_interface = kimi_manifest.fetch('interface')
+  check(kimi_interface['displayName'] == plugin_interface['displayName'], 'kimi display name disagrees')
+  check(kimi_interface['shortDescription'] == plugin_interface['shortDescription'], 'kimi short description disagrees')
+  check(kimi_interface['longDescription'] == plugin_interface['longDescription'], 'kimi long description disagrees')
+  check(kimi_interface['developerName'] == plugin_interface['developerName'], 'kimi developer name disagrees')
+  check(kimi_interface['websiteURL'] == plugin_interface['websiteURL'], 'kimi website URL disagrees')
+
   skill_directories = Dir.glob(File.join(ROOT, 'skills', '*')).select { |path| File.directory?(path) }.sort
   check(!skill_directories.empty?, 'no skills found')
   skills = skill_directories.map do |directory|
