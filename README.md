@@ -91,7 +91,9 @@ The portable format does not prescribe a universal installation command.
 
 Skills contain instructions and packaging checks.
 They do not supply a package manager, device agent, GitHub client, credentials, or MCP server.
-[SDK](https://github.com/oxtech-ember/EmberBSD-SDK) and [Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) currently provide design boundaries without released CLI/API interfaces.
+[SDK](https://github.com/oxtech-ember/EmberBSD-SDK) provides development-host
+workspace and sysroot tools. Stable application contracts and
+[Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) remain separate work.
 The assistant must recheck current sources before using future interfaces.
 [Ports](https://github.com/oxtech-ember/EmberBSD-Ports) owns shared recipes and compatibility patches.
 Your personal Ports owns your chosen behavior changes.
