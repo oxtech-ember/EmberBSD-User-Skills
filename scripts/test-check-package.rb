@@ -26,7 +26,8 @@ class PackageCheckTest
   def with_package
     Dir.mktmpdir('ember-package-test-') do |root|
       %w[plugin.json kimi.plugin.json LICENSE assets/emberbsd-logo.png .agents/plugins/marketplace.json
-         .claude-plugin/plugin.json .claude-plugin/marketplace.json].each do |relative|
+         .claude-plugin/plugin.json .claude-plugin/marketplace.json
+         .grok-plugin/marketplace.json].each do |relative|
         target = File.join(root, relative)
         FileUtils.mkdir_p(File.dirname(target))
         FileUtils.cp(File.join(SOURCE, relative), target)
@@ -169,6 +170,26 @@ class PackageCheckTest
       data['version'] = '0.0.0'
       File.write(path, JSON.pretty_generate(data))
       assert_rejected(root, /kimi manifest version disagrees/)
+    end
+  end
+
+  def test_grok_catalog_version_disagreement_is_rejected
+    with_package do |root, _skill|
+      path = File.join(root, '.grok-plugin/marketplace.json')
+      data = JSON.parse(File.read(path))
+      data['plugins'].first['version'] = '0.0.0'
+      File.write(path, JSON.pretty_generate(data))
+      assert_rejected(root, /grok catalog plugin version disagrees/)
+    end
+  end
+
+  def test_grok_catalog_root_path_source_is_rejected
+    with_package do |root, _skill|
+      path = File.join(root, '.grok-plugin/marketplace.json')
+      data = JSON.parse(File.read(path))
+      data['plugins'].first['source'] = './'
+      File.write(path, JSON.pretty_generate(data))
+      assert_rejected(root, /grok catalog plugin must clone the repository URL/)
     end
   end
 

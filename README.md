@@ -4,7 +4,7 @@ Instructions for AI agents that assist [EmberBSD](https://github.com/oxtech-embe
 Use real CLI/API tools to complete the requested task.
 Keep personal software changes in the user's selected Ports repository.
 
-Version **0.4.2** provides ten small skills.
+Version **0.4.3** provides ten small skills.
 Each task skill has a narrow trigger, short instructions, and its own required references.
 The two legacy entry points now select a task skill.
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/home).
@@ -85,6 +85,18 @@ Install from the Plugins screen or run:
 
 Reinstall the plugin after a release; Kimi Code does not update it automatically.
 
+Grok Build reads `.grok-plugin/marketplace.json`.
+Add the marketplace and install the plugin:
+
+```sh
+grok plugin marketplace add oxtech-ember/EmberBSD-User-Skills
+grok plugin install emberbsd-user --trust
+```
+
+The catalog entry clones this repository from GitHub.
+Grok rejects a repository-root path such as `./` in a catalog entry.
+To update, run `grok plugin marketplace update` and `grok plugin update emberbsd-user`.
+
 The portable format does not prescribe a universal installation command.
 
 ## Tools and current limits
@@ -119,6 +131,7 @@ ruby scripts/check-package.rb
 ```
 
 Add `--codex` for isolated native discovery and icon path checks.
+Add `--grok` for an isolated Grok Build install of the committed `HEAD`.
 Version **0.3.1** passed those native checks with Codex CLI **0.159.2** on **2026-10-11**.
 Version **0.4.0** passed the local consistency checks on **2026-10-11**.
 See [packaging and acceptance](docs/packaging.md) for version-specific evidence and task scenarios.
@@ -126,6 +139,8 @@ Version **0.4.1** passed package checks, 21 validator regressions, isolated skil
 See the [DevBoards routing checks](docs/packaging.md#devboards-routing-acceptance) for evidence and limits.
 Version **0.4.2** added the Kimi Code manifest and passed package checks with 22 validator regressions on **2026-10-16**.
 See [Kimi Code manifest packaging](docs/packaging.md#kimi-code-manifest-packaging) for evidence and limits.
+Version **0.4.3** added the Grok Build catalog.
+See [Grok Build marketplace packaging](docs/packaging.md#grok-build-marketplace-packaging) for evidence and limits.
 
 Package checks do not execute device workflows or establish agent behavior.
 Desktop icon rendering and on-device acceptance require separate checks.

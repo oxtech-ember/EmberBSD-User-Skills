@@ -1,0 +1,30 @@
+{
+  "name": "emberbsd-user-skills",
+  "description": "Task-specific skills for EmberBSD applications, diagnostics, network capture, personal Ports, GitHub, and OS installation.",
+  "owner": {
+    "name": "neonix20b",
+    "url": "https://github.com/neonix20b"
+  },
+  "plugins": [
+    {
+      "name": "emberbsd-user",
+      "description": "Task-specific EmberBSD user skills for applications, diagnosis, capture, personal patches, GitHub, and supported installation.",
+      "version": "0.4.3",
+      "category": "developer-tools",
+      "homepage": "https://github.com/oxtech-ember/EmberBSD-User-Skills",
+      "keywords": [
+        "emberbsd",
+        "user",
+        "installation",
+        "applications",
+        "personal-ports",
+        "skills",
+        "agent-plugins"
+      ],
+      "source": {
+        "source": "url",
+        "url": "https://github.com/oxtech-ember/EmberBSD-User-Skills.git"
+      }
+    }
+  ]
+}

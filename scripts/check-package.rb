@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 # Adapted from oxtech-ember/Ember-Agent-Skills; see LICENSE.
 
+require 'fileutils'
 require 'json'
 require 'yaml'
 require 'open3'
@@ -30,6 +31,31 @@ def check_icon(interface, field, root)
         "missing or external icon: #{target}")
   check(File.binread(target) == File.binread(File.join(ROOT, 'assets/emberbsd-logo.png')),
         "icon differs from the package's EmberBSD logo: #{target}")
+end
+
+def grok_command(home, *arguments, chdir:)
+  output, errors, status = Timeout.timeout(120) do
+    Open3.capture3({ 'GROK_HOME' => home }, ENV.fetch('GROK', 'grok'), *arguments, chdir: chdir)
+  end
+  check(status.success?, "grok #{arguments.join(' ')} failed: #{output}#{errors}")
+  output
+end
+
+# Grok clones a url source with Git, so this check installs the committed HEAD.
+def grok_install(index, plugin_name)
+  Dir.mktmpdir('ember-skills-grok-') do |work|
+    home = File.join(work, 'home')
+    marketplace = File.join(work, 'marketplace')
+    FileUtils.mkdir_p([home, File.join(marketplace, '.grok-plugin')])
+    local = JSON.parse(JSON.generate(index))
+    local['plugins'].each { |plugin| plugin['source'] = { 'source' => 'url', 'url' => ROOT } }
+    File.write(File.join(marketplace, '.grok-plugin/marketplace.json'), JSON.pretty_generate(local))
+    grok_command(home, 'plugin', 'marketplace', 'add', marketplace, chdir: work)
+    grok_command(home, 'plugin', 'install', plugin_name, '--trust', chdir: work)
+    installed = JSON.parse(grok_command(home, 'plugin', 'list', '--json', chdir: work))
+    inspection = JSON.parse(grok_command(home, 'inspect', '--json', chdir: work))
+    [installed, inspection]
+  end
 end
 
 def codex_response(input, output, id, method, params)
@@ -91,7 +117,8 @@ def codex_plugin_list(profile_dir, catalog_name, config)
   end
 end
 
-check(ARGV.empty? || ARGV == ['--codex'], 'usage: ruby scripts/check-package.rb [--codex]')
+check(ARGV.empty? || ARGV == ['--codex'] || ARGV == ['--grok'],
+      'usage: ruby scripts/check-package.rb [--codex | --grok]')
 
 begin
   manifest = read_json(File.join(ROOT, 'plugin.json'))
@@ -143,6 +170,17 @@ begin
   check(kimi_interface['longDescription'] == plugin_interface['longDescription'], 'kimi long description disagrees')
   check(kimi_interface['developerName'] == plugin_interface['developerName'], 'kimi developer name disagrees')
   check(kimi_interface['websiteURL'] == plugin_interface['websiteURL'], 'kimi website URL disagrees')
+
+  grok_catalog = read_json(File.join(ROOT, '.grok-plugin/marketplace.json'))
+  check(grok_catalog['name'] == catalog['name'], 'grok catalog identity disagrees')
+  grok_plugins = grok_catalog['plugins']
+  grok_entry = grok_plugins.is_a?(Array) && grok_plugins.length == 1 ? grok_plugins.first : nil
+  check(grok_entry && grok_entry['name'] == manifest['name'], 'grok catalog plugin identity disagrees')
+  check(grok_entry['version'] == manifest['version'], 'grok catalog plugin version disagrees')
+  check(grok_entry['description'] == client_entry['description'], 'grok catalog description disagrees')
+  # Grok rejects an empty or "./" catalog path, so the entry clones the repository.
+  check(grok_entry['source'] == { 'source' => 'url', 'url' => "#{manifest['repository']}.git" },
+        'grok catalog plugin must clone the repository URL')
 
   skill_directories = Dir.glob(File.join(ROOT, 'skills', '*')).select { |path| File.directory?(path) }.sort
   check(!skill_directories.empty?, 'no skills found')
@@ -211,6 +249,16 @@ begin
       end
     end
     puts "PASS: native Codex plugin and skill icon paths"
+  end
+  if ARGV == ['--grok']
+    installed, inspection = grok_install(grok_catalog, manifest['name'])
+    check(installed.any? { |plugin| plugin['name'] == manifest['name'] && plugin['version'] == manifest['version'] },
+          "Grok did not install #{manifest['name']} #{manifest['version']} from the committed HEAD")
+    loaded = inspection.fetch('skills').select { |skill| skill.dig('source', 'plugin_name') == manifest['name'] }
+    expected = skills.map { |path| File.basename(File.dirname(path)) }.sort
+    check(loaded.map { |skill| skill['name'] }.sort == expected,
+          "Grok did not load every skill: #{loaded.map { |skill| skill['name'] }.join(', ')}")
+    puts "PASS: native Grok install of #{manifest['name']} #{manifest['version']}; #{loaded.length} skill(s)"
   end
 rescue JSON::ParserError, Psych::Exception, KeyError, TypeError, NoMethodError, SystemCallError,
        EOFError, Timeout::Error, RuntimeError => error
