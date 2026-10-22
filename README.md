@@ -4,7 +4,7 @@ Instructions for AI agents that assist [EmberBSD](https://github.com/oxtech-embe
 Use real CLI/API tools to complete the requested task.
 Keep personal software changes in the user's selected Ports repository.
 
-Version **0.4.4** provides ten small skills.
+Version **0.4.5** provides ten small skills.
 Each task skill has a narrow trigger, short instructions, and its own required references.
 The two legacy entry points now select a task skill.
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/home).
@@ -141,7 +141,8 @@ Version **0.4.2** added the Kimi Code manifest and passed package checks with 22
 See [Kimi Code manifest packaging](docs/packaging.md#kimi-code-manifest-packaging) for evidence and limits.
 Version **0.4.3** added the Grok Build catalog.
 See [Grok Build marketplace packaging](docs/packaging.md#grok-build-marketplace-packaging) for evidence and limits.
-Version **0.4.4** added design rules to `emberbsd-personal-ports`.
+Personal Ports guidance reuses the current stack for each target ABI.
+Personal changes retain their own checks and provenance.
 
 Package checks do not execute device workflows or establish agent behavior.
 Desktop icon rendering and on-device acceptance require separate checks.

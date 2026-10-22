@@ -57,9 +57,15 @@ A personal patch does not require an upstream PR or separate artifact platform.
 
 Design the change before you write it; choose the simplest structure.
 Fix the cause; do not add workarounds.
-Reuse shared code instead of copying it.
+Move existing common logic into a shared layer before extending it.
 Make the customization switchable through configuration.
 Do not test for a device name in shared code.
-Build on the development host with the current shared package stack.
+Build on the development host with the current shared package stack for the target ABI.
+Reuse its shared objects, packages, and current sysroot.
+Keep incompatible ABIs separate.
+Do not create board-specific Mesa or Plasma variants.
+Keep personal changes explicit and separate from shared package acceptance.
+Reuse shared acceptance only with matching revisions, ABI, package hashes, and checks.
+Retest the customization and affected behavior.
 Install only runtime files on the device; keep development tools on the host.
 If the fix helps all users, propose it as a shared change.
