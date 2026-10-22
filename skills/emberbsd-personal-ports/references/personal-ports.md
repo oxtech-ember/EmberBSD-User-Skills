@@ -52,3 +52,14 @@ Preserve the last usable software and data while testing its replacement.
 Publish checked files only to the authorized personal destination.
 If `emberbsd-github` is available, use it.
 A personal patch does not require an upstream PR or separate artifact platform.
+
+## Design rules
+
+Design the change before you write it; choose the simplest structure.
+Fix the cause; do not add workarounds.
+Reuse shared code instead of copying it.
+Make the customization switchable through configuration.
+Do not test for a device name in shared code.
+Build on the development host with the current shared package stack.
+Install only runtime files on the device; keep development tools on the host.
+If the fix helps all users, propose it as a shared change.
