@@ -1,11 +1,14 @@
 # Phone cable stages
 
-Use the exact model's OS-owned installer and stage documents.
+Read the exact model's [DevBoards profile](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json) for hardware, boot layout, and current support limits.
+Read the OS-owned installer and stage contracts for software behavior.
+For A133, use the [tool contracts](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/tools/docs/a133).
+A preflight contract does not establish a complete installation procedure.
 Set `OS_SRC` to the selected checkout when available.
 Otherwise read the current [OS sources](https://github.com/oxtech-ember/EmberBSD).
 
 ```sh
-git -C "$OS_SRC" ls-files 'ember/boards/*' 'ember/*install*' 'ember/**/*install*'
+git -C "$OS_SRC" ls-files 'ember/tools/*' 'ember/image/*' 'ember/*install*' 'ember/**/*install*'
 command -v adb
 adb version
 adb devices -l

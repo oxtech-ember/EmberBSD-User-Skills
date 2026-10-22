@@ -8,7 +8,7 @@ description: "Use when installing or restoring EmberBSD on a board's card or onb
 Identify the exact board, revision, host, and storage medium.
 If the model is unknown, perform authorized read-only discovery first.
 Read [board media operations](references/boards.md).
-Read the exact OS board page.
+Read the exact DevBoards hardware profile and current support limits.
 Check its supported boot layout and installation procedure.
 A related SoC or DTS does not establish support.
 

@@ -10,7 +10,7 @@ Reuse the authorized connection.
 Read [device evidence](references/device-diagnostics.md).
 If the model is unknown, perform authorized read-only discovery first.
 Collect the smallest relevant evidence.
-Check the exact board's support evidence.
+Check the exact DevBoards profile's current support limits.
 Reproduce the fault through the application's real CLI/API.
 
 Repair the demonstrated cause within the requested scope.

@@ -8,7 +8,8 @@ description: "Use when inspecting installation support, installing, or starting 
 Identify the selected device serial and exact model.
 If the model is unknown, perform authorized read-only identity discovery first.
 Read [phone cable stages](references/phone-cable.md).
-Inspect current OS sources for the exact model's installer and stage documents.
+Check the exact DevBoards profile for hardware applicability and current support.
+Inspect current OS sources for the installer and stage contracts.
 Inspection excludes writes, reboots, and transfers.
 A missing property or failed `su` does not authorize unlocking.
 

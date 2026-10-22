@@ -1,19 +1,21 @@
 # Board media operations
 
+Read the exact [DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards) profile for current support, loader offsets, boot layout, and eMMC exposure.
+Start with its [reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md) and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json).
+Match the board revision, carrier, and selected loader before using a configuration.
+
 Set `OS_SRC` to the selected OS checkout when available.
-Discover its board and image instructions.
+Discover its image builders and software contracts.
 
 ```sh
 git -C "$OS_SRC" rev-parse HEAD
-git -C "$OS_SRC" ls-files 'ember/boards/*' 'ember/image/*'
+git -C "$OS_SRC" ls-files 'ember/image/*' 'ember/boot/*' 'ember/tools/*'
 ```
 
-Otherwise read the current [OS board catalog](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards).
-Read the exact board page for support evidence, loader offsets, boot layout, and eMMC exposure.
-Read [DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards) for carrier wiring, controls, and loader contracts.
-Start with its [reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md) and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json).
-Match the board revision and carrier before using a configuration.
-Keep the public OS procedure authoritative for installation and current support.
+Otherwise read the current [OS sources](https://github.com/oxtech-ember/EmberBSD).
+Read builder mechanics and executable checks beside their implementation.
+Use DevBoards for hardware applicability, including descriptions previously placed in OS image guides.
+Do not treat a builder contract as physical support.
 
 With available GitHub CLI, discover release assets.
 

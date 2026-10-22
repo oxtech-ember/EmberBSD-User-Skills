@@ -47,7 +47,11 @@ A version string or build does not establish those results.
 
 Read the current [SDK](https://github.com/oxtech-ember/EmberBSD-SDK) and
 [Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) sources before using their interfaces.
-Both repositories currently describe design boundaries without a released CLI/API.
-Use existing OS, Ports, and Examples instructions.
+SDK owns host build orchestration, sysroots, and release kits.
+Runtime and stable application contracts remain separate work.
+Use OS subsystem documentation for OS mechanisms.
+Use Ports for dependency recipes and upstream patches.
+Use Examples or the application's repository for standalone UI applications.
+Do not use OS as an umbrella for other projects' documentation.
 For personal patches, read the Ports recipe's patch mechanism.
 If `emberbsd-personal-ports` is available, use it.

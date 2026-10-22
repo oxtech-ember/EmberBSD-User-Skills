@@ -5,6 +5,7 @@ This project applies selected writing rules. Its checks do not establish formal 
 
 Give each skill one bounded task. Keep its trigger and procedure in `SKILL.md`.
 Move necessary detail into short bundled references. Use a router only to select another named skill.
+Link to implementation contracts at their owner instead of copying them into a skill.
 
 ## Writing rules
 
@@ -54,3 +55,6 @@ Wrap source prose at approximately 100 columns. Line width is a readability targ
 Optional native checks use `ruby scripts/check-package.rb --codex`.
 Discovery and icon queries each have a 20-second timeout. Process cleanup can add up to ten seconds.
 These checks use temporary Codex profiles and preserve saved user settings.
+
+Remove completed assistant task instructions from referenced design documents.
+A current contract describes behavior and checks, not a previous implementation assignment.

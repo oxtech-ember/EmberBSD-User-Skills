@@ -4,7 +4,7 @@ Instructions for AI agents that assist [EmberBSD](https://github.com/oxtech-embe
 Use real CLI/API tools to complete the requested task.
 Keep personal software changes in the user's selected Ports repository.
 
-Version **0.4.5** provides ten small skills.
+Version **0.4.6** provides ten small skills.
 Each task skill has a narrow trigger, short instructions, and its own required references.
 The two legacy entry points now select a task skill.
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/home).
@@ -104,22 +104,28 @@ The portable format does not prescribe a universal installation command.
 Skills contain instructions and packaging checks.
 They do not supply a package manager, device agent, GitHub client, credentials, or MCP server.
 [SDK](https://github.com/oxtech-ember/EmberBSD-SDK) provides development-host
-workspace and sysroot tools. Stable application contracts and
+build orchestration, workspace and sysroot tools, and release kits. Stable application contracts and
 [Runtime](https://github.com/oxtech-ember/EmberBSD-Runtime) remain separate work.
 The assistant must recheck current sources before using future interfaces.
 [Ports](https://github.com/oxtech-ember/EmberBSD-Ports) owns shared recipes and compatibility patches.
 Your personal Ports owns your chosen behavior changes.
+Standalone UI applications belong in Examples or their own repository.
+OS documentation belongs beside its subsystem; it is not an umbrella for every project.
+Skills provide concise routes to owner documentation without copying implementation contracts.
 
 A phone model without an OS installer is a first port, not a refusal.
 The phone skill runs read-only identity inspection and its first port track.
 The track collects identity, boot chain, and prior art, then proposes the bring-up plan.
 The OS development VM image declares its own input provenance.
 It remains separate from a general installation release.
-Board-specific procedures belong to the [OS board catalog](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/boards).
-[EmberBSD-DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards) provides hardware references for developers building their own devices.
-Its [reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md) and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json) lead to board, carrier, SoC, interface, and bootloader records.
-Use these records to check hardware identity and configuration applicability during installation or hardware diagnosis.
-Current support, installation procedures, and executable checks remain with OS and Ports.
+[EmberBSD-DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards) owns hardware descriptions and current support guidance with explicit limits.
+Its [reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md)
+and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json)
+lead to board, carrier, SoC, interface, bootloader, and storage-layout records.
+Check the exact profile before installation or diagnosis.
+OS software mechanisms, API contracts, image builders, and executable checks stay beside their implementation.
+OS image guides explain builder mechanics; DevBoards defines hardware applicability and boot layouts.
+Keep one canonical support description without test chronology or duplicate catalogs.
 
 ## Validate the package
 

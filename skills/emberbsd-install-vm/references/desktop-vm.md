@@ -9,7 +9,7 @@ Set `OS_SRC` to the selected checkout when available.
 Discover the actual image and host tools.
 
 ```sh
-git -C "$OS_SRC" ls-files 'ember/image/*' 'ember/boot/*utm*'
+git -C "$OS_SRC" ls-files 'ember/image/*' 'sys/dev/fdt/docs/utm-framebuffer.md'
 command -v qemu-img qemu-system-aarch64
 qemu-system-aarch64 --version
 qemu-system-aarch64 -machine help
@@ -31,7 +31,7 @@ qemu-img check "$IMAGE"
 Use the owning launch recipe.
 Check aarch64 `virt`, matching UEFI, VirtIO disk/network, serial console, CPU, RAM, and backend.
 UTM UI settings do not supply a universal QEMU command.
-Read the [framebuffer workflow](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/boot/utm-framebuffer.md)
+Read the [framebuffer workflow](https://github.com/oxtech-ember/EmberBSD/blob/main/sys/dev/fdt/docs/utm-framebuffer.md)
 and [desktop Examples](https://github.com/oxtech-ember/EmberBSD-Examples/tree/main/desktop) for graphics.
 
 Read image-specific login defaults.
