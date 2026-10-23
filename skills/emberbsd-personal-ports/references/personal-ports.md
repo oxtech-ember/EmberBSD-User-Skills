@@ -63,6 +63,7 @@ Do not test for a device name in shared code.
 Build on the development host with the current shared package stack for the target ABI.
 Reuse its shared objects, packages, and current sysroot.
 Keep incompatible ABIs separate.
+Make builds work on case-insensitive file systems.
 Do not create board-specific Mesa or Plasma variants.
 Keep personal changes explicit and separate from shared package acceptance.
 Reuse shared acceptance only with matching revisions, ABI, package hashes, and checks.
