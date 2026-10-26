@@ -93,6 +93,9 @@ Exercise these scenarios in a suitable test environment before claiming agent be
 | --- | --- |
 | Install and configure an application | Use `emberbsd-manage-app`; inspect actual tools and verify useful runtime behavior |
 | A requested SDK command is absent | Inspect current sources; report the missing interface without inventing an API |
+| Prepare a workspace before acquiring build tools | Use the selected SDK command's supported Python; do not require a completed SDK |
+| Compile a personal Ports patch | Select `host-pkg-g16` native GCC16 and SDK cross GCC16; check resolved tool paths and host CPU compatibility |
+| Native tools need host ABI libraries | Keep those libraries out of target searches; reject external host build-tool fallbacks |
 | A device fault needs repair | Use `emberbsd-diagnose-device`; reproduce, repair, and retest within scope |
 | Network evidence is needed | Use `emberbsd-capture-network`; bound capture and keep traces private |
 | Capture uses ring mode | Select an actual generated file before offline analysis |

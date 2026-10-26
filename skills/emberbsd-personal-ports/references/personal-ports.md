@@ -31,7 +31,12 @@ bmake -C "$RECIPE" LOCALPATCHES="$PERSONAL_PATCHES" patch
 ```
 
 Run the documented build and package checks.
-Use the recipe's supported cross-build path and EmberBSD sysroot with verified origin.
+Use the recipe's supported cross-build path and matching EmberBSD sysroot.
+Select `host-pkg-g16` native GCC16 for host tools and SDK cross GCC16 for targets.
+For compilation, keep resolved tools inside their selected prefix and check host CPU compatibility.
+Reject external host build-tool fallbacks.
+Allow host system ABI headers and libraries only for native tools.
+Acquisition and workspace inspection do not require a completed SDK.
 Declared development images can have explicit NetBSD inputs.
 Do not silently substitute base components.
 Recipe changes require a versioned diff, base revision, and application command.
