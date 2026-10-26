@@ -17,7 +17,8 @@ Keep unrelated user edits and the last usable version.
 Make a focused personal patch through the owning recipe's mechanism.
 Use the supported cross-build path and matching EmberBSD target sysroot.
 Follow the [SDK tool selection procedure](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
-Use GCC16 and current shared dependency versions.
+Use Clang/LLVM and current shared dependency versions.
+Select GCC only for an explicit platform requirement.
 Never install older compilers or libraries to satisfy dependency builds.
 
 Test the customization on the selected target.

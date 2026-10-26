@@ -180,7 +180,7 @@ module SkillWriting
       references << destination(definition[2]) if definition
     end
     references.concat(visible.scan(/<[^>]+\b(?:href|src)=["']([^"']+)["'][^>]*>/i).flatten)
-    references.uniq.filter_map do |reference|
+    references.uniq.map do |reference|
       next if reference.empty? || reference.match?(/\A(?:https?:|mailto:|app:|\/\/)/i)
 
       if reference.match?(/\A(?:[a-z][a-z0-9+.-]*:|\/)/i)
@@ -203,7 +203,7 @@ module SkillWriting
       unless anchors(File.read(target)).include?(URI::DEFAULT_PARSER.unescape(fragment))
         "#{path}: missing markdown fragment: #{reference}"
       end
-    end
+    end.compact
   end
 
   def errors(skill_root, description)
