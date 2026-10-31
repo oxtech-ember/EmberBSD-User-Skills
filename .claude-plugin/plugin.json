@@ -1,6 +1,6 @@
 {
   "name": "emberbsd-user",
-  "version": "0.4.10",
+  "version": "0.4.11",
   "description": "Task-specific agent skills for EmberBSD applications, device diagnosis, network capture, personal Ports, GitHub, and supported OS installation.",
   "author": {
     "name": "neonix20b",

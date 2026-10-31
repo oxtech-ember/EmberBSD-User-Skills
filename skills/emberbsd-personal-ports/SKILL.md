@@ -27,6 +27,8 @@ If an update breaks the patch, diagnose the changed source.
 Repair the patch within the requested scope.
 Rebuild the affected software.
 Rerun the acceptance checks.
+Add a causal regression test for a logic or behavior fix.
+A trivial fix (step order, typo, or path) needs no regression test.
 Retire a patch only when upstream behavior satisfies the requested result.
 
 Save patch hashes, intent, revisions, and test results in the selected personal repository.

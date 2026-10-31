@@ -18,6 +18,9 @@ Link to implementation contracts at their owner instead of copying them into a s
 - Report observed results and missing evidence clearly.
 - Decide build reuse by the [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md).
   Do not add checks that reread or rehash inputs that a git hash or input key already identifies.
+- Require a causal regression test for a logic or behavior fix.
+  A trivial fix needs no regression test: step order, typos, paths, and similar mechanical corrections.
+  Such tests cost time and add no value.
 - Refer to another skill by name, without a relative link into its folder.
 
 Each skill must retain its own `agents/openai.yaml`, icon and supporting files.
