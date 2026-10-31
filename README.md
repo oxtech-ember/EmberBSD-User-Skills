@@ -4,7 +4,7 @@ Instructions for AI agents that assist [EmberBSD](https://github.com/oxtech-embe
 Use real CLI/API tools to complete the requested task.
 Keep personal software changes in the user's selected Ports repository.
 
-Version **0.4.9** provides ten small skills.
+Version **0.4.10** provides ten small skills.
 Each task skill has a narrow trigger, short instructions, and its own required references.
 The two legacy entry points now select a task skill.
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/home).

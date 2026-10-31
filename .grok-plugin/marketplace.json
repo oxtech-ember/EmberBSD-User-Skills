@@ -9,7 +9,7 @@
     {
       "name": "emberbsd-user",
       "description": "Task-specific EmberBSD user skills for applications, diagnosis, capture, personal patches, GitHub, and supported installation.",
-      "version": "0.4.9",
+      "version": "0.4.10",
       "category": "developer-tools",
       "homepage": "https://github.com/oxtech-ember/EmberBSD-User-Skills",
       "keywords": [

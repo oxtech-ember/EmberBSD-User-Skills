@@ -16,6 +16,8 @@ Link to implementation contracts at their owner instead of copying them into a s
 - Preserve exact CLI commands, API names, paths, flags and identifiers.
 - Check actual source or help before describing a tool.
 - Report observed results and missing evidence clearly.
+- Decide build reuse by the [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md).
+  Do not add checks that reread or rehash inputs that a git hash or input key already identifies.
 - Refer to another skill by name, without a relative link into its folder.
 
 Each skill must retain its own `agents/openai.yaml`, icon and supporting files.
