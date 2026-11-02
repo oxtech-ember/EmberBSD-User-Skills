@@ -32,11 +32,11 @@ bmake -C "$RECIPE" LOCALPATCHES="$PERSONAL_PATCHES" patch
 
 Run the documented build and package checks.
 Use the recipe's supported cross-build path and matching EmberBSD sysroot.
-Select native and target compilers separately from their SDK prefixes.
-Use Clang/LLVM by default and GCC only for an explicit platform requirement.
+Select host and target compiler families independently from their SDK prefixes.
+Use Clang/LLVM by default; select GCC only for documented platform limits, such as missing LLVM support.
+Never switch families automatically after failure.
 Keep the runtime consistent with the target ABI.
-For compilation, keep resolved tools inside their selected prefix and check host CPU compatibility.
-Reject external host build-tool fallbacks.
+Resolve build tools inside the selected prefix, check host CPU compatibility, and reject external fallbacks.
 Allow host system ABI headers and libraries only for native tools.
 Acquisition and workspace inspection do not require a completed SDK.
 Declared development images can have explicit NetBSD inputs.
@@ -46,12 +46,9 @@ No personal-Ports CLI or overlay resolver is assumed.
 
 ## Maintain the result
 
-Compare upstream changes before applying an update.
-Apply shared adaptations before personal adaptations through the owning mechanism.
-Investigate unexpected checksum changes.
-Repair rejected hunks and failed behavior checks.
-Keep the customization while rebuilding and retesting.
-A clean patch or build does not establish accepted behavior.
+Compare upstream changes before updating. Apply shared, then personal adaptations through the owner.
+Investigate checksum changes. Repair rejected hunks and failed behavior.
+Rebuild and retest the customization. A clean patch or build does not establish accepted behavior.
 
 Test the customization, ordinary behavior, and a relevant failure case on the selected VM or device.
 Record revisions, patch hashes, checks, and unrun target tests.

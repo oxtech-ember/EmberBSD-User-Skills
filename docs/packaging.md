@@ -157,3 +157,11 @@ The `--grok` check installed the committed candidate in a temporary `GROK_HOME`.
 Grok loaded all 10 skills from the plugin.
 These checks ran on macOS arm64.
 This verifies packaging and skill discovery only. It does not establish assistant behavior.
+
+## Clang-first skill migration (2026-10-26)
+
+Current guidance defaults to SDK Clang/LLVM with explicit GCC platform exceptions.
+Host and target families remain independent; compilation failures do not select another family.
+SDK runtime and release migration limits remain explicit; legacy evidence retains its original compiler.
+Local consistency and all 24 validator regressions passed for this candidate on macOS arm64.
+These checks do not establish a working LLVM target SDK, target execution, or hardware acceptance.
