@@ -1,10 +1,10 @@
 # Personal patch operations
 
-Set `PORTS_SRC`, `RECIPE`, and `PERSONAL_PATCHES` from the selected checkouts and private patch directory.
+Set `PORTS_SRC`, `RECIPE`, and `PERSONAL_PATCHES` to the selected local paths.
 Keep host and target paths separate.
 Read the owning [Ports](https://github.com/oxtech-ember/EmberBSD-Ports) recipe and build instructions.
 Preserve the upstream distribution and shared EmberBSD adaptations.
-Store personal patches and their intent in the selected repository.
+Store personal patches and intent in the selected repository.
 A full upstream fork is not required.
 
 ## Discover the patch mechanism
@@ -31,16 +31,16 @@ bmake -C "$RECIPE" LOCALPATCHES="$PERSONAL_PATCHES" patch
 ```
 
 Run the documented build and package checks.
-Use the recipe's supported cross-build path and matching EmberBSD sysroot.
+Use the recipe's cross-build path and matching EmberBSD sysroot.
 Select host and target compiler families independently from their SDK prefixes.
-Use Clang/LLVM by default; select GCC only for documented platform limits, such as missing LLVM support.
-Never switch families automatically after failure.
+Use Clang/LLVM by default; select GCC only for documented platform limits.
+Repair compilation failures while retaining the selected compiler families.
 Keep the runtime consistent with the target ABI.
-Resolve build tools inside the selected prefix, check host CPU compatibility, and reject external fallbacks.
+Resolve tools inside the selected prefix. Check host CPU compatibility. Reject external fallbacks.
 Allow host system ABI headers and libraries only for native tools.
 Acquisition and workspace inspection do not require a completed SDK.
 Declared development images can have explicit NetBSD inputs.
-Do not silently substitute base components.
+Preserve the declared provenance of base components.
 Recipe changes require a versioned diff, base revision, and application command.
 No personal-Ports CLI or overlay resolver is assumed.
 
@@ -59,18 +59,18 @@ A personal patch does not require an upstream PR or separate artifact platform.
 
 ## Design rules
 
-Design the change before you write it; choose the simplest structure.
-Fix the cause; do not add workarounds.
+Design the simplest change before coding.
+Repair the owning implementation and verify the affected contract.
 Move existing common logic into a shared layer before extending it.
 Make the customization switchable through configuration.
-Do not test for a device name in shared code.
+Pass device differences through generic properties and operation tables.
 Build on the development host with the current shared package stack for the target ABI.
 Reuse its shared objects, packages, and sysroot by their [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md).
 Keep incompatible ABIs separate.
 Make builds work on case-insensitive file systems.
-Do not create board-specific Mesa or Plasma variants.
+Use common Mesa and Plasma recipes for every board of each target ABI.
 Keep personal changes explicit and separate from shared package acceptance.
-Reuse shared acceptance with the same input key; do not reread or rehash inputs.
+Reuse shared acceptance and recorded input identity when the input key matches.
 Retest the customization and affected behavior.
 Install only runtime files on the device; keep development tools on the host.
 If the fix helps all users, propose it as a shared change.

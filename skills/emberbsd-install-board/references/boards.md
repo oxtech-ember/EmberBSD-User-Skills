@@ -15,7 +15,7 @@ git -C "$OS_SRC" ls-files 'ember/image/*' 'ember/boot/*' 'ember/tools/*'
 Otherwise read the current [OS sources](https://github.com/oxtech-ember/EmberBSD).
 Read builder mechanics and executable checks beside their implementation.
 Use DevBoards for hardware applicability, including descriptions previously placed in OS image guides.
-Do not treat a builder contract as physical support.
+Report builder checks separately from physical support evidence.
 
 With available GitHub CLI, discover release assets.
 
@@ -36,7 +36,7 @@ sha256 -q "$IMAGE"
 Compare the published digest.
 Verify decompressed bytes against their documented digest.
 Missing images or checksums block writing.
-Do not substitute another project's release.
+Use an EmberBSD artifact with the selected release's provenance.
 Keep declared development-image input provenance explicit.
 
 Identify the exact medium and size.

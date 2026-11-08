@@ -17,9 +17,9 @@ Make a focused personal patch through the owning recipe's mechanism.
 Use the supported cross-build path and matching EmberBSD target sysroot.
 Follow the [SDK tool selection procedure](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/tool-selection.md).
 Use Clang/LLVM by default. Select GCC only for a documented platform limit, such as missing LLVM support.
-Select host and target families independently; never switch after failure.
+Select host and target families independently. Repair failures while retaining those selections.
 Use current shared dependency versions.
-Never install older compilers or libraries to satisfy dependency builds.
+Adapt dependency builds to the current shared compilers and libraries.
 
 Test ordinary behavior and a relevant failure case on the selected target.
 If an update breaks the patch, diagnose and repair the changed source within scope; rebuild and rerun acceptance.

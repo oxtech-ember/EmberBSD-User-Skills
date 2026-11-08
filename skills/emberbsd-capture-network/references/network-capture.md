@@ -15,7 +15,7 @@ pkg_info -a
 Read the installed help and manuals.
 Install missing supported tools through their package instructions.
 If `emberbsd-manage-app` is available, use it.
-Do not invent SDK or Runtime commands.
+Use SDK or Runtime commands verified in their current source or help.
 
 Select the interface, peer, direction, duration, and private output path.
 Set `LOCAL_ADDR` to the selected interface's local address.

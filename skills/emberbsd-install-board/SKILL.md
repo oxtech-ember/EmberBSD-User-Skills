@@ -14,7 +14,7 @@ A related SoC or DTS does not establish support.
 
 Verify the image's published hash and documented input provenance.
 For `dd`, use a verified uncompressed raw whole-disk image.
-Do not pass a compressed archive or qcow2 to `dd`.
+Decompress or convert the image through the documented procedure before raw writing.
 Report a missing image, checksum, or model procedure before writing.
 
 Reuse authorization for the exact action, device, and data loss.

@@ -24,7 +24,7 @@ gh api user --jq .login
 
 Use existing authentication.
 Missing access is a specific blocker.
-Do not invent an endpoint or start an unrelated account login.
+Use documented endpoints and the authentication for the selected account.
 
 For requested creation, read `gh repo create --help` or the connected tool schema.
 Use the selected owner and visibility.

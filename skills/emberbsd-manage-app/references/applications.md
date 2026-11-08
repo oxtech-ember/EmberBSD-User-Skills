@@ -29,16 +29,16 @@ Preview a selected archive with `pkg_add -n "$ARCHIVE"`.
 Inspect the proposed dependencies.
 Use the actual tool's authorized install, update, or removal command.
 Preserve the requested data retention during removal.
-Do not invent an EmberBSD package wrapper or whole-system upgrade.
+Use package operations verified in the installed tools.
 
 If a current release is absent, inspect the owning
 [Ports recipe](https://github.com/oxtech-ember/EmberBSD-Ports).
 Follow that recipe's build instructions.
-Do not select obsolete software only because a snapshot contains it.
+Select the current supported recipe and adapt dependencies when a snapshot is stale.
 
 Discover service ownership from package file lists and actual rc files.
 If the selected script implements `status`, `start`, or `restart`, use the authorized action.
-Do not assume Linux `systemctl` or `/proc` on EmberBSD.
+Use EmberBSD's verified rc scripts and installed diagnostic interfaces.
 
 Verify a meaningful request and a relevant failure case.
 Graphical applications require a visible window and input check.
@@ -52,6 +52,6 @@ Runtime and stable application contracts remain separate work.
 Use OS subsystem documentation for OS mechanisms.
 Use Ports for dependency recipes and upstream patches.
 Use Examples or the application's repository for standalone UI applications.
-Do not use OS as an umbrella for other projects' documentation.
+Keep documentation at each project's implementation owner.
 For personal patches, read the Ports recipe's patch mechanism.
 If `emberbsd-personal-ports` is available, use it.

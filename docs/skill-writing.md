@@ -9,6 +9,8 @@ Link to implementation contracts at their owner instead of copying them into a s
 
 ## Writing rules
 
+- State the required action positively and name its owner.
+- State the condition and the result that demonstrates completion.
 - Use imperative instructions and active voice.
 - Put one action in each sentence.
 - Use simple words and consistent technical names.
@@ -17,7 +19,7 @@ Link to implementation contracts at their owner instead of copying them into a s
 - Check actual source or help before describing a tool.
 - Report observed results and missing evidence clearly.
 - Decide build reuse by the [input key](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/input-keys.md).
-  Do not add checks that reread or rehash inputs that a git hash or input key already identifies.
+  Reuse the recorded Git hash or input key as the input identity.
 - Require a causal regression test for a logic or behavior fix.
   A trivial fix needs no regression test: step order, typos, paths, and similar mechanical corrections.
   Such tests cost time and add no value.

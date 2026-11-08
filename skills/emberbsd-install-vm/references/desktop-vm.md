@@ -3,7 +3,7 @@
 Use an aarch64 guest.
 Apple Silicon can use UTM/QEMU with HVF.
 Other hosts require a documented QEMU emulation path and its limits.
-Do not assume an x86-64 guest or bare-metal desktop port.
+Require a documented port before selecting an x86-64 guest or bare-metal desktop.
 
 Set `OS_SRC` to the selected checkout when available.
 Discover the actual image and host tools.

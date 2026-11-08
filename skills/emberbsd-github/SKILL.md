@@ -18,7 +18,7 @@ Select files explicitly for staging.
 Check the staged diff before a commit.
 
 Create or publish only within the authorized account and repository scope.
-Do not request repeated permission for an already authorized publication.
+Reuse existing publication authorization within its exact scope.
 Request authorization when a new destination or action exceeds that scope.
 If branch policy or the user requires a PR, use one.
 Do not force-push unrelated work.

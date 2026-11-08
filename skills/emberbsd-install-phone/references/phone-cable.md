@@ -49,7 +49,7 @@ test -n "$MODEL" && git -C "$OS_SRC" grep -n -i -F -e "$MODEL" -- ember README.m
 
 Inspection excludes writes, reboots, and transfers.
 Missing properties or failed `su` are evidence gaps.
-Do not assume `adb root` on production Android.
+Verify the available privilege mechanism on the selected production device.
 When the model has no stage documents, stop the installation stages.
 Start the [first port track](first-port.md) instead.
 Recheck current sources on later tasks.
@@ -68,7 +68,7 @@ When model-specific tooling exists, require this evidence before advancing.
 
 Resolve backup blocks from the exact model procedure.
 Use binary-clean `adb -s "$SERIAL" exec-out su -c 'dd if=VERIFIED_BLOCK'` redirected to a private host file.
-Do not use terminal `adb shell` for block backups.
+Keep block backups on the binary-clean `exec-out` path.
 Hash both ends.
 Compare two reads of critical areas.
 Re-read the environment after vendor reboots.
