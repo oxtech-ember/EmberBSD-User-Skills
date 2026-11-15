@@ -1,5 +1,11 @@
 # Device and application evidence
 
+For module boundaries and configuration choices, read
+[EmberBSD-Docs](https://github.com/oxtech-ember/EmberBSD-Docs).
+Source code is also documentation; use owner sources, schemas, tests, manuals, and help for exact behavior.
+For documentation changes, follow the guide's
+[ownership rules](https://github.com/oxtech-ember/EmberBSD-Docs/blob/main/CONTRIBUTING.md#separate-concepts-from-implementation).
+
 Run read-only discovery in the selected target shell.
 Keep host and target paths separate.
 For SSH, use existing authorized access with `BatchMode=yes` and `ConnectTimeout=10`.

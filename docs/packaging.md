@@ -93,6 +93,11 @@ Exercise these scenarios in a suitable test environment before claiming agent be
 | --- | --- |
 | Install and configure an application | Use `emberbsd-manage-app`; inspect actual tools and verify useful runtime behavior |
 | A requested SDK command is absent | Inspect current sources; report the missing interface without inventing an API |
+| Explain architecture, module boundaries, or configuration choices | Read EmberBSD-Docs for concepts and follow its links to implementation owners |
+| Find an exact API, configuration field, default, or command | Read owner sources, comments, schemas, tests, manuals, and help |
+| A requested shared change alters module responsibilities or configuration meaning | Update owner documentation and the affected conceptual explanation in EmberBSD-Docs |
+| A change only alters an exact field or command | Update documentation at its implementation owner; check guide links without copying the reference |
+| Document a personal patch | Keep its explanation in the selected personal repository; do not infer permission to publish shared documentation |
 | Prepare a workspace before acquiring build tools | Use the selected SDK command's supported Python; apply the selected command's bootstrap prerequisites |
 | Compile a personal Ports patch | Select native and target Clang/LLVM separately, or an explicit GCC platform profile; check paths, host CPU, and target runtime |
 | Native tools need host ABI libraries | Keep those libraries out of target searches; reject external host build-tool fallbacks |
@@ -125,6 +130,14 @@ Exercise these scenarios in a suitable test environment before claiming agent be
 
 Package checks and source review do not establish these runtime outcomes.
 Record client, version, target, request, executed checks, and observed results for an actual run.
+
+## Conceptual documentation routing acceptance
+
+Version **0.4.13** passed local consistency and all **24** validator regressions on **2026-11-15** with Ruby **2.6.10**.
+Codex CLI **0.169.0-alpha.11.1** discovered all ten skills and resolved plugin and skill icon paths.
+All ten folders passed isolated link, anchor, prose, metadata, icon, and license checks.
+Independent source review covered the five documentation scenarios above, including personal-patch scope.
+The checks establish instruction routing and packaging, not execution of those tasks by an agent.
 
 ## DevBoards routing acceptance
 

@@ -4,8 +4,10 @@ Set `PORTS_SRC`, `RECIPE`, and `PERSONAL_PATCHES` to the selected local paths.
 Keep host and target paths separate.
 Read the owning [Ports](https://github.com/oxtech-ember/EmberBSD-Ports) recipe and build instructions.
 Preserve the upstream distribution and shared EmberBSD adaptations.
-Store personal patches and intent in the selected repository.
+Keep patches and explanations in the personal repository.
 A full upstream fork is not required.
+
+Read [EmberBSD-Docs](https://github.com/oxtech-ember/EmberBSD-Docs) for concepts; use owner sources for exact behavior.
 
 ## Discover the patch mechanism
 

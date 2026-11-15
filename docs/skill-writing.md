@@ -4,8 +4,21 @@ Use ASD-STE100-style English. Read the primary [ASD source](https://www.asd-ste1
 This project applies selected writing rules. Its checks do not establish formal ASD-STE100 compliance.
 
 Give each skill one bounded task. Keep its trigger and procedure in `SKILL.md`.
-Move necessary detail into short bundled references. Use a router only to select another named skill.
+Move necessary detail into short bundled references. Use a router to select a task skill or the conceptual guide.
 Link to implementation contracts at their owner instead of copying them into a skill.
+
+## Documentation ownership
+
+Use [EmberBSD-Docs](https://github.com/oxtech-ember/EmberBSD-Docs) for concepts, module boundaries, interactions, design reasons, and configuration choices.
+Source code is also documentation: comments, headers, schemas, tests, manuals, and help explain precise behavior beside its implementation.
+Keep exact API lists, fields, defaults, commands, and algorithms with that owner.
+Skills select scenarios, explain necessary actions, and link to those sources.
+Keep each installed skill's routing self-contained; do not require a sibling folder or this repository's maintainer documents.
+When changing documentation, follow the public guide's
+[ownership rules](https://github.com/oxtech-ember/EmberBSD-Docs/blob/main/CONTRIBUTING.md#separate-concepts-from-implementation).
+Update conceptual explanations when responsibilities, interactions, or configuration meanings change.
+For precise implementation changes alone, update owner documentation and check guide links.
+Keep personal patch explanations in the personal repository unless a shared contribution is requested.
 
 ## Writing rules
 

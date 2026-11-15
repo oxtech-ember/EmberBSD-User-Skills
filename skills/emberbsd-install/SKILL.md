@@ -9,6 +9,10 @@ Reuse the known model, revision, storage, host, and connection.
 Ask for missing facts only when they change the next action.
 If the model is unknown, perform authorized read-only discovery first.
 
+For architecture and configuration choices, read
+[EmberBSD-Docs](https://github.com/oxtech-ember/EmberBSD-Docs).
+Use owner sources, schemas, tests, and help for exact behavior and commands.
+
 | Selected target | Skill name |
 | --- | --- |
 | Board with a card or onboard storage | `emberbsd-install-board` |

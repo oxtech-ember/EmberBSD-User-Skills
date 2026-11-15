@@ -1,5 +1,11 @@
 # Board media operations
 
+For module boundaries and configuration choices, read
+[EmberBSD-Docs](https://github.com/oxtech-ember/EmberBSD-Docs).
+Source code is also documentation; use owner sources, schemas, tests, manuals, and help for exact behavior.
+For documentation changes, follow the guide's
+[ownership rules](https://github.com/oxtech-ember/EmberBSD-Docs/blob/main/CONTRIBUTING.md#separate-concepts-from-implementation).
+
 Read the exact [DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards) profile for current support, loader offsets, boot layout, and eMMC exposure.
 Start with its [reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md) and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json).
 Match the board revision, carrier, and selected loader before using a configuration.

@@ -32,6 +32,13 @@ Synchronize through the established repository workflow.
 Preserve unrelated edits.
 
 Review publication files before staging.
+For documentation changes, read the
+[concept and implementation rules](https://github.com/oxtech-ember/EmberBSD-Docs/blob/main/CONTRIBUTING.md#separate-concepts-from-implementation).
+Keep architecture, module relationships, design reasons, and configuration choices in EmberBSD-Docs.
+Source code is also documentation; keep exact behavior in owner sources, schemas, tests, manuals, and help.
+Update conceptual explanations when the requested change affects them.
+For precise implementation changes alone, update owner documentation and check guide links.
+Keep personal patch explanations in the selected personal repository.
 Exclude secrets, personal data, private paths, unredistributable downloads, and build outputs.
 Select the files explicitly.
 

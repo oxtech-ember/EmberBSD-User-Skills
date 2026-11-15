@@ -1,5 +1,11 @@
 # Phone cable stages
 
+For module boundaries and configuration choices, read
+[EmberBSD-Docs](https://github.com/oxtech-ember/EmberBSD-Docs).
+Source code is also documentation; use owner sources, schemas, tests, manuals, and help for exact behavior.
+For documentation changes, follow the guide's
+[ownership rules](https://github.com/oxtech-ember/EmberBSD-Docs/blob/main/CONTRIBUTING.md#separate-concepts-from-implementation).
+
 Read the exact model's [DevBoards profile](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json) for hardware, boot layout, and current support limits.
 Read the OS-owned installer and stage contracts for software behavior.
 For A133, use the [tool contracts](https://github.com/oxtech-ember/EmberBSD/tree/main/ember/tools/docs/a133).

@@ -4,9 +4,9 @@ Instructions for AI agents that assist [EmberBSD](https://github.com/oxtech-embe
 Use real CLI/API tools to complete the requested task.
 Keep personal software changes in the user's selected Ports repository.
 
-Version **0.4.12** provides ten small skills.
+Version **0.4.13** provides ten small skills.
 Each task skill has a narrow trigger, short instructions, and its own required references.
-The two legacy entry points now select a task skill.
+The two entry points select a task skill and link to conceptual guidance.
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/home).
 
 ## Select a task skill
@@ -110,8 +110,14 @@ The assistant must recheck current sources before using future interfaces.
 [Ports](https://github.com/oxtech-ember/EmberBSD-Ports) owns shared recipes and compatibility patches.
 Your personal Ports owns your chosen behavior changes.
 Standalone UI applications belong in Examples or their own repository.
-OS documentation belongs beside its subsystem; it is not an umbrella for every project.
-Skills provide concise routes to owner documentation without copying implementation contracts.
+[EmberBSD-Docs](https://github.com/oxtech-ember/EmberBSD-Docs) explains architecture, module boundaries,
+interactions, design reasons, and the meaning of configuration choices.
+Source code is also documentation: comments, headers, schemas, tests, manuals, and help document exact behavior at its owner.
+Skills route tasks to these sources without copying implementation contracts.
+Update the conceptual guide when responsibilities, interactions, or configuration meanings change.
+Keep precise implementation changes at their owner and check the guide's links.
+Follow the guide's [ownership rules](https://github.com/oxtech-ember/EmberBSD-Docs/blob/main/CONTRIBUTING.md#separate-concepts-from-implementation)
+and keep personal patch explanations in the selected personal repository.
 
 A phone model without an OS installer is a first port, not a refusal.
 The phone skill runs read-only identity inspection and its first port track.

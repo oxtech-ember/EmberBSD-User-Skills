@@ -52,6 +52,10 @@ Runtime and stable application contracts remain separate work.
 Use OS subsystem documentation for OS mechanisms.
 Use Ports for dependency recipes and upstream patches.
 Use Examples or the application's repository for standalone UI applications.
-Keep documentation at each project's implementation owner.
+For module boundaries and configuration choices, read
+[EmberBSD-Docs](https://github.com/oxtech-ember/EmberBSD-Docs).
+Source code is also documentation; keep exact behavior in owner sources, schemas, tests, and help.
+When documenting changes, follow the guide's
+[ownership rules](https://github.com/oxtech-ember/EmberBSD-Docs/blob/main/CONTRIBUTING.md#separate-concepts-from-implementation).
 For personal patches, read the Ports recipe's patch mechanism.
 If `emberbsd-personal-ports` is available, use it.

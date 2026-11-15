@@ -1,5 +1,11 @@
 # Desktop VM operations
 
+For module boundaries and configuration choices, read
+[EmberBSD-Docs](https://github.com/oxtech-ember/EmberBSD-Docs).
+Source code is also documentation; use owner sources, schemas, tests, manuals, and help for exact behavior.
+For documentation changes, follow the guide's
+[ownership rules](https://github.com/oxtech-ember/EmberBSD-Docs/blob/main/CONTRIBUTING.md#separate-concepts-from-implementation).
+
 Use an aarch64 guest.
 Apple Silicon can use UTM/QEMU with HVF.
 Other hosts require a documented QEMU emulation path and its limits.
