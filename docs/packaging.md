@@ -148,6 +148,7 @@ Version 0.4.14 passed all 24 validator regressions. Codex CLI 0.171.0-alpha.13.2
 On a physical AArch64 system, the installed SDK client 0.27 previewed and updated the installed `archivers/zstd` root.
 It reused six packages and downloaded zero bytes. Compression, decompression and saved settings passed.
 A separate reboot test with client 0.26 checked the package service, its network retry and an actual package replacement.
+Version 0.4.16 routes a provisioned OS profile to its automatic update service and trial-boot checks.
 Version 0.4.15 routes installed OS updates through the shared OS procedure for VMs and physical machines.
 All 24 validator regressions passed. Codex CLI 0.171.0-alpha.13.2 discovered all eleven skills and resolved their icons.
 

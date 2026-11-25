@@ -14,11 +14,11 @@ Check the installed package version, application behavior and saved settings.
 
 For the OS, follow the [installed system update procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/tools/docs/installed-system-update.md).
 Record the running revision, installed sets, architecture, boot path and recovery method.
-Select published artifacts for the installed profile.
-For an S3 release, fetch the required artifacts with the installed SDK client and verify their identities together.
-For a supported installation medium, verify the full image and its matching sets.
-If a required component is unavailable, report its identity before changing the running system.
-Use the installation profile to select its supported upgrade procedure.
+Check whether the image has two provisioned slots and the `ember_os_update` service.
+For that profile, follow the [automatic OS update procedure](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/tools/docs/automatic-system-update.md).
+Check the service log for the selected generation, trial boot and confirmation or rollback.
+For a manual installation profile, collect the verified sets for its supported installer.
+Report any missing component before changing the running system.
 For machine-specific boot files or recovery, consult the matching loader or hardware profile.
 Preserve the package inventory, local configuration and user data.
 After reboot, verify the kernel revision, installed base, modules, network, application settings and service behavior.
