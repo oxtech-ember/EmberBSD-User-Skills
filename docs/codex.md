@@ -51,7 +51,7 @@ The other clients' icon URL does not supply Codex metadata.
 
 Each skill has `interface.icon_small` and `icon_large` in its `agents/openai.yaml`.
 Those paths start at the skill directory, not `agents/`.
-All ten skills contain `assets/emberbsd-logo.png` for standalone installation.
+All skills contain `assets/emberbsd-logo.png` for standalone installation.
 The checker compares each copy with the root logo.
 Use the PNG directly.
 The root SVG wraps an external PNG.

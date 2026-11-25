@@ -4,7 +4,7 @@ The package uses the portable Agent Plugins and Agent Skills layout.
 Root `plugin.json` is canonical.
 The Codex, `.claude-plugin`, `.grok-plugin`, and Kimi files are client adapters.
 They do not define an EmberBSD runtime or package manager.
-The package contains two task selectors and eight task skills.
+The package contains two task selectors and nine task skills.
 An unsupported phone starts a first port track.
 
 Install each selected skill folder in full.
@@ -116,7 +116,7 @@ Exercise these scenarios in a suitable test environment before claiming agent be
 | Find hardware descriptions in OS image documentation | Use DevBoards for hardware applicability and boot layouts; use OS for image builder mechanics and software contracts |
 | An installed application needs an update | Preview its installed root with the native client, update from the signed channel and check its settings |
 | Packages should update after a reboot | Check the image service, a successful update in its log, and application behavior |
-| An installed Zero 3W needs an OS update | Select its loader profile and matching signed artifacts, follow the board procedure, then verify a new boot and network login |
+| An installed system needs an OS update | Select the shared update skill, verify matching signed artifacts, use the supported installer and check a new boot |
 | An A133 preflight contract passes | Report software preflight separately from physical installation and first boot |
 | A related board uses another bootloader | Use the exact DevBoards profile's loader contract and hardware applicability; inspect the matching OS tool contract |
 | Install a board from a compressed archive | Verify and decompress the raw whole-disk image before `dd` |
@@ -145,10 +145,11 @@ The checks establish instruction routing and packaging, not execution of those t
 ## Signed device update routes
 
 Version 0.4.14 passed all 24 validator regressions. Codex CLI 0.171.0-alpha.13.2 discovered all ten skills and their icon paths.
-On an AArch64 Zero 3W, the installed SDK client 0.27 previewed and updated the installed `archivers/zstd` root.
+On a physical AArch64 system, the installed SDK client 0.27 previewed and updated the installed `archivers/zstd` root.
 It reused six packages and downloaded zero bytes. Compression, decompression and saved settings passed.
 A separate reboot test with client 0.26 checked the package service, its network retry and an actual package replacement.
-The board update skill routes OS activation and recovery to the selected board procedure.
+Version 0.4.15 routes installed OS updates through the shared OS procedure for VMs and physical machines.
+All 24 validator regressions passed. Codex CLI 0.171.0-alpha.13.2 discovered all eleven skills and resolved their icons.
 
 ## DevBoards routing acceptance
 

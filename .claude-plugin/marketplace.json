@@ -5,14 +5,14 @@
     "url": "https://github.com/neonix20b"
   },
   "metadata": {
-    "description": "Task-specific skills for EmberBSD applications, diagnostics, network capture, personal Ports, GitHub, and OS installation.",
-    "version": "0.4.14"
+    "description": "Task-specific skills for EmberBSD applications, diagnostics, network capture, personal Ports, GitHub, and OS installation and updates.",
+    "version": "0.4.15"
   },
   "plugins": [
     {
       "name": "emberbsd-user",
       "source": "./",
-      "version": "0.4.14",
+      "version": "0.4.15",
       "description": "Task-specific EmberBSD user skills for applications, diagnosis, capture, personal patches, GitHub, and supported installation.",
       "category": "developer-tools",
       "icon": "https://raw.githubusercontent.com/oxtech-ember/EmberBSD-User-Skills/main/assets/emberbsd-logo.png"

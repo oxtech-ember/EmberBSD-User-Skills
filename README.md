@@ -4,7 +4,7 @@ Instructions for AI agents that assist [EmberBSD](https://github.com/oxtech-embe
 Use real CLI/API tools to complete the requested task.
 Keep personal software changes in the user's selected Ports repository.
 
-Version **0.4.14** provides ten small skills.
+Version **0.4.15** provides eleven small skills.
 Each task skill has a narrow trigger, short instructions, and its own required references.
 The two entry points select a task skill and link to conceptual guidance.
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/home).
@@ -19,8 +19,9 @@ The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](
 | [`emberbsd-capture-network`](skills/emberbsd-capture-network/SKILL.md) | You need packet/HCI evidence or network measurements |
 | [`emberbsd-personal-ports`](skills/emberbsd-personal-ports/SKILL.md) | You need a personal application patch across upstream updates |
 | [`emberbsd-github`](skills/emberbsd-github/SKILL.md) | You need to create, synchronize, or publish the selected repository |
+| [`emberbsd-update`](skills/emberbsd-update/SKILL.md) | You need to update an installed system on a physical machine or VM |
 | [`emberbsd-install`](skills/emberbsd-install/SKILL.md) | An installation task needs target selection |
-| [`emberbsd-install-board`](skills/emberbsd-install-board/SKILL.md) | You need to update an installed board, install EmberBSD, or restore board storage |
+| [`emberbsd-install-board`](skills/emberbsd-install-board/SKILL.md) | You need to install EmberBSD or restore board storage |
 | [`emberbsd-install-vm`](skills/emberbsd-install-vm/SKILL.md) | You need an aarch64 guest on a desktop VM host |
 | [`emberbsd-install-phone`](skills/emberbsd-install-phone/SKILL.md) | You need installation inspection or a first port track for a USB-connected phone or tablet |
 

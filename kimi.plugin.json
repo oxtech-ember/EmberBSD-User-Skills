@@ -1,7 +1,7 @@
 {
   "name": "emberbsd-user",
-  "version": "0.4.14",
-  "description": "Task-specific agent skills for EmberBSD applications, device diagnosis, network capture, personal Ports, GitHub, and supported OS installation.",
+  "version": "0.4.15",
+  "description": "Task-specific agent skills for EmberBSD applications, device diagnosis, network capture, personal Ports, GitHub, and supported OS installation and updates.",
   "keywords": [
     "emberbsd",
     "user",
@@ -17,7 +17,7 @@
   "interface": {
     "displayName": "EmberBSD User Skills",
     "shortDescription": "Use EmberBSD devices and maintain your personal Ports.",
-    "longDescription": "Select a focused skill for EmberBSD applications, device diagnosis, private network evidence, personal patches, GitHub, or supported installation. Use existing documented tools and verify the requested result.",
+    "longDescription": "Select a focused skill for EmberBSD applications, device diagnosis, private network evidence, personal patches, GitHub, or supported installation and updates. Use existing documented tools and verify the requested result.",
     "developerName": "neonix20b",
     "websiteURL": "https://github.com/oxtech-ember/EmberBSD-User-Skills"
   },
