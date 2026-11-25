@@ -4,7 +4,7 @@ Instructions for AI agents that assist [EmberBSD](https://github.com/oxtech-embe
 Use real CLI/API tools to complete the requested task.
 Keep personal software changes in the user's selected Ports repository.
 
-Version **0.4.13** provides ten small skills.
+Version **0.4.14** provides ten small skills.
 Each task skill has a narrow trigger, short instructions, and its own required references.
 The two entry points select a task skill and link to conceptual guidance.
 The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](https://agentskills.io/home).
@@ -14,15 +14,18 @@ The package uses [Agent Plugins](https://agent-plugins.org/) and [Agent Skills](
 | Skill | Use it when |
 | --- | --- |
 | [`emberbsd-user-guide`](skills/emberbsd-user-guide/SKILL.md) | An EmberBSD user task needs skill selection |
-| [`emberbsd-manage-app`](skills/emberbsd-manage-app/SKILL.md) | You need to install, configure, update, or remove an application |
+| [`emberbsd-manage-app`](skills/emberbsd-manage-app/SKILL.md) | You need to manage applications or automatic package updates |
 | [`emberbsd-diagnose-device`](skills/emberbsd-diagnose-device/SKILL.md) | A device or application has a fault |
 | [`emberbsd-capture-network`](skills/emberbsd-capture-network/SKILL.md) | You need packet/HCI evidence or network measurements |
 | [`emberbsd-personal-ports`](skills/emberbsd-personal-ports/SKILL.md) | You need a personal application patch across upstream updates |
 | [`emberbsd-github`](skills/emberbsd-github/SKILL.md) | You need to create, synchronize, or publish the selected repository |
 | [`emberbsd-install`](skills/emberbsd-install/SKILL.md) | An installation task needs target selection |
-| [`emberbsd-install-board`](skills/emberbsd-install-board/SKILL.md) | You need EmberBSD on a board's card or onboard storage |
+| [`emberbsd-install-board`](skills/emberbsd-install-board/SKILL.md) | You need to update an installed board, install EmberBSD, or restore board storage |
 | [`emberbsd-install-vm`](skills/emberbsd-install-vm/SKILL.md) | You need an aarch64 guest on a desktop VM host |
 | [`emberbsd-install-phone`](skills/emberbsd-install-phone/SKILL.md) | You need installation inspection or a first port track for a USB-connected phone or tablet |
+
+For a running device, start with the signed binary channel.
+Use the [device update guide](https://github.com/oxtech-ember/EmberBSD-Docs/blob/main/configuration/installation-and-updates.md) to choose a package or OS update.
 
 Load only the skills needed for the requested result.
 Each folder works alone with its bundled references, Codex metadata, and icon.

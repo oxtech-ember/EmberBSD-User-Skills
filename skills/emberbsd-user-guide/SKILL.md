@@ -17,7 +17,8 @@ When updating documentation, follow the guide's
 
 | User task | Skill name |
 | --- | --- |
-| Install, configure, update, or remove an application | `emberbsd-manage-app` |
+| Manage applications or automatic package updates | `emberbsd-manage-app` |
+| Update the OS on an installed board | `emberbsd-install-board` |
 | Diagnose or repair a device fault | `emberbsd-diagnose-device` |
 | Capture packets or HCI traffic; measure network performance | `emberbsd-capture-network` |
 | Keep a personal application patch across updates | `emberbsd-personal-ports` |

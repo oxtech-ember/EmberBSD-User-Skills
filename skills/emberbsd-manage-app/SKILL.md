@@ -1,6 +1,6 @@
 ---
 name: emberbsd-manage-app
-description: "Use when installing, configuring, updating, or removing an application on EmberBSD."
+description: "Use when managing EmberBSD applications or enabling, checking, or troubleshooting automatic package updates on a device."
 ---
 
 # Manage an EmberBSD application
@@ -8,7 +8,8 @@ description: "Use when installing, configuring, updating, or removing an applica
 Identify the requested application behavior and selected target.
 Reuse the authorized connection.
 Read [application operations](references/applications.md).
-Discover installed package tools and their documented commands.
+For package updates, use the installed SDK client and its signed binary channel.
+For unattended updates, check the image's `ember_pkg_update` service.
 Check the package version, dependencies, configuration, and service owner.
 
 Preserve user data and unrelated settings.

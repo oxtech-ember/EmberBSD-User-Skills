@@ -10,6 +10,23 @@ Read the exact [DevBoards](https://github.com/oxtech-ember/EmberBSD-DevBoards) p
 Start with its [reader guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/docs/reader-guide.md) and [catalog](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/catalog.json).
 Match the board revision, carrier, and selected loader before using a configuration.
 
+## Update an installed board
+
+Use the update procedure for the installed model, loader and system profile.
+For vendor U-Boot on a Zero 3W, follow the [Zero 3W update guide](https://github.com/oxtech-ember/EmberBSD-DevBoards/blob/main/boards/a733-zero3w/update.md).
+Record the running revision with `sysctl -n kern.buildinfo`.
+Use the [installed client's download command](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/sdk-client.md#download-one-release-artifact) for each published artifact ID.
+An ordinary user can download the files into a private directory on FFS.
+Match the board boot set, modules, device trees and required userland sets to the same OS revision.
+If a required set is missing, report its identity before changing the running system.
+For a custom kernel, check the configuration and modules supplied by its provider.
+Follow the board procedure for recovery, local configuration, activation and reboot.
+For a station ABI change, install matching WPA userland and kernel before the first reboot.
+After reboot, check the kernel revision, settings, network and a new login.
+For automatic package updates, use `emberbsd-manage-app` or the [SDK package update guide](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/automatic-updates.md).
+
+## Install or restore a board image
+
 Set `OS_SRC` to the selected OS checkout when available.
 Discover its image builders and software contracts.
 

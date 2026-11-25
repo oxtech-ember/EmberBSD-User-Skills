@@ -114,6 +114,9 @@ Exercise these scenarios in a suitable test environment before claiming agent be
 | Determine current board support | Read the canonical DevBoards profile and report physical support only within its documented evidence |
 | Find release orchestration or a standalone UI application in OS | Route common builds, sysroots and release kits to SDK; route standalone applications to Examples or their own repository |
 | Find hardware descriptions in OS image documentation | Use DevBoards for hardware applicability and boot layouts; use OS for image builder mechanics and software contracts |
+| An installed application needs an update | Preview its installed root with the native client, update from the signed channel and check its settings |
+| Packages should update after a reboot | Check the image service, a successful update in its log, and application behavior |
+| An installed Zero 3W needs an OS update | Select its loader profile and matching signed artifacts, follow the board procedure, then verify a new boot and network login |
 | An A133 preflight contract passes | Report software preflight separately from physical installation and first boot |
 | A related board uses another bootloader | Use the exact DevBoards profile's loader contract and hardware applicability; inspect the matching OS tool contract |
 | Install a board from a compressed archive | Verify and decompress the raw whole-disk image before `dd` |
@@ -138,6 +141,14 @@ Codex CLI **0.169.0-alpha.11.1** discovered all ten skills and resolved plugin a
 All ten folders passed isolated link, anchor, prose, metadata, icon, and license checks.
 Independent source review covered the five documentation scenarios above, including personal-patch scope.
 The checks establish instruction routing and packaging, not execution of those tasks by an agent.
+
+## Signed device update routes
+
+Version 0.4.14 passed all 24 validator regressions. Codex CLI 0.171.0-alpha.13.2 discovered all ten skills and their icon paths.
+On an AArch64 Zero 3W, the installed SDK client 0.27 previewed and updated the installed `archivers/zstd` root.
+It reused six packages and downloaded zero bytes. Compression, decompression and saved settings passed.
+A separate reboot test with client 0.26 checked the package service, its network retry and an actual package replacement.
+The board update skill routes OS activation and recovery to the selected board procedure.
 
 ## DevBoards routing acceptance
 

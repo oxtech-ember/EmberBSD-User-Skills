@@ -1,9 +1,9 @@
 ---
 name: emberbsd-install-board
-description: "Use when installing or restoring EmberBSD on a board's card or onboard storage."
+description: "Use when updating an installed EmberBSD board or installing or restoring EmberBSD on its storage."
 ---
 
-# Install EmberBSD on a board
+# Install or update EmberBSD on a board
 
 Identify the exact board, revision, host, and storage medium.
 If the model is unknown, perform authorized read-only discovery first.
@@ -11,6 +11,11 @@ Read [board media operations](references/boards.md).
 Read the exact DevBoards hardware profile and current support limits.
 Check its supported boot layout and installation procedure.
 A related SoC or DTS does not establish support.
+
+For an installed OS update, follow [the board update route](references/boards.md#update-an-installed-board).
+Return after verifying the updated system.
+
+## Install or restore from an image
 
 Verify the image's published hash and documented input provenance.
 For `dd`, use a verified uncompressed raw whole-disk image.

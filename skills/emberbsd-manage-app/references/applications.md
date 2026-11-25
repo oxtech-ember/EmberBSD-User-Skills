@@ -24,6 +24,43 @@ pkg_info -N "$PACKAGE"
 pkg_info -R "$PACKAGE"
 ```
 
+## Update installed packages
+
+Use the image's native client to get compatible binaries from the signed S3 channel.
+Use a root shell for these commands with the image's configured state and cache.
+Define this shell function:
+
+```sh
+client() {
+    /usr/pkg/bin/python3.15 -I /usr/local/libexec/ember-sdk.pyz \
+        --config /usr/local/etc/ember-sdk.json "$@"
+}
+client installed
+client plan --installed
+```
+
+For one application, preview with `client plan --installed --package "$ROOT"`.
+Set `ROOT` to its installed Ports path, such as `archivers/zstd`.
+Run `client update --package "$ROOT"` for that application or `client update` for all installed packages.
+Check the resulting versions, application settings and a useful application action.
+If verification fails, check network access, time and the configured trust root before retrying.
+
+For automatic updates, inspect the [image service](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/image/README.md#package-updates-on-a-running-system).
+On an image with this service, set `ember_pkg_update=YES` in `/etc/rc.conf.d/ember_pkg_update`.
+Start `/etc/rc.d/ember_pkg_update` with its `start` action when needed.
+
+```sh
+/etc/rc.d/ember_pkg_update status
+grep ember_pkg_update /var/log/messages | tail
+```
+
+After a requested reboot, check the log for a successful pass and test the application with its saved settings.
+If the client or service is missing, identify the component and consult the installed system's provisioning procedure.
+The image builder installs the package layer only when creating a fresh image.
+Read the [SDK update contract](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/automatic-updates.md) for retry behavior and package selection.
+
+## Other package operations
+
 Read `man pkg_add`, `man pkg_delete`, or installed `pkgin help`.
 Preview a selected archive with `pkg_add -n "$ARCHIVE"`.
 Inspect the proposed dependencies.
@@ -31,7 +68,7 @@ Use the actual tool's authorized install, update, or removal command.
 Preserve the requested data retention during removal.
 Use package operations verified in the installed tools.
 
-If a current release is absent, inspect the owning
+For a requested source build, inspect the owning
 [Ports recipe](https://github.com/oxtech-ember/EmberBSD-Ports).
 Follow that recipe's build instructions.
 Select the current supported recipe and adapt dependencies when a snapshot is stale.
