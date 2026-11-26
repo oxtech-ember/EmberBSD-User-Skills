@@ -8,8 +8,8 @@ description: "Use when managing EmberBSD applications or enabling, checking, or 
 Identify the requested application behavior and selected target.
 Reuse the authorized connection.
 Read [application operations](references/applications.md).
-For package updates, use the installed SDK client and its signed binary channel.
-For unattended updates, check the image's `ember_pkg_update` service.
+For package updates, use the base program `ember-update` and its signed binary channel.
+For unattended updates, check the image's `ember_update` service.
 Check the package version, dependencies, configuration, and service owner.
 
 Preserve user data and unrelated settings.

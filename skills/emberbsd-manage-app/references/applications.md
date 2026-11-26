@@ -26,42 +26,27 @@ pkg_info -R "$PACKAGE"
 
 ## Update installed packages
 
-Use the image's native client to get compatible binaries from the signed S3 channel.
-Use a root shell for these commands with the image's configured state and cache.
-Define this shell function:
+Read `ember-update status` and `ember-update history` as an ordinary user.
+Run `ember-update check` as root to refresh the signed package selection.
+Use `ember-update apply` for an authorized update.
+Check the resulting package versions, saved settings and a useful application action.
 
-```sh
-client() {
-    /usr/pkg/bin/python3.15 -I /usr/local/libexec/ember-sdk.pyz \
-        --config /usr/local/etc/ember-sdk.json "$@"
-}
-client installed
-client plan --installed
-```
+For unattended updates, check `ember_update=YES` and `ember_update_packages=YES` in `/etc/rc.conf`.
+The service checks at boot and periodically.
+On two-slot systems, inspect the pending transaction and the configured reboot window.
+After restarting, check confirmation in the update history.
+On single-root systems, check the installed versions after the update completes.
 
-For one application, preview with `client plan --installed --package "$ROOT"`.
-Set `ROOT` to its installed Ports path, such as `archivers/zstd`.
-Run `client update --package "$ROOT"` for that application or `client update` for all installed packages.
-Check the resulting versions, application settings and a useful application action.
-If verification fails, check network access, time and the configured trust root before retrying.
-
-For automatic updates, inspect the [image service](https://github.com/oxtech-ember/EmberBSD/blob/main/ember/image/README.md#package-updates-on-a-running-system).
-On an image with this service, set `ember_pkg_update=YES` in `/etc/rc.conf.d/ember_pkg_update`.
-Start `/etc/rc.d/ember_pkg_update` with its `start` action when needed.
-
-```sh
-/etc/rc.d/ember_pkg_update status
-grep ember_pkg_update /var/log/messages | tail
-```
-
-After a requested reboot, check the log for a successful pass and test the application with its saved settings.
-If the client or service is missing, identify the component and consult the installed system's provisioning procedure.
-The image builder installs the package layer only when creating a fresh image.
-Read the [SDK update contract](https://github.com/oxtech-ember/EmberBSD-SDK/blob/main/docs/automatic-updates.md) for retry behavior and package selection.
+If verification fails, inspect the reported error, system time, network and release trust anchor.
+If the base client is missing, consult the installed image's release procedure.
+[Native client and service](https://github.com/oxtech-ember/EmberBSD/blob/main/usr.sbin/ember-update/README.md) · [Device update guide](https://github.com/oxtech-ember/EmberBSD-Docs/blob/main/modules/updates.md)
 
 ## Other package operations
 
-Read `man pkg_add`, `man pkg_delete`, or installed `pkgin help`.
+Use `ember-update catalog` to find an application in the signed catalog.
+As root, run `ember-update install "$PKGPATH" --pkgname "$PKGNAME"` with the selected catalog values.
+Verify registration immediately on a single root or after trial confirmation on two slots.
+For an explicitly selected local archive or a removal, read `man pkg_add` or `man pkg_delete`.
 Preview a selected archive with `pkg_add -n "$ARCHIVE"`.
 Inspect the proposed dependencies.
 Use the actual tool's authorized install, update, or removal command.
